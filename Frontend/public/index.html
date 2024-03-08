@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Állatmenhely</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <section class="header">
+       <nav>
+        <a href="index.html"><img src="logo.png" id="logo"></a> 
+        <div class = "pages" id="links">
+            <i class="fa fa-times" onclick="menuBezaras()"></i>
+            <ul>
+                <li><a href="index.html" id="fooldal">Főoldal</a></li>
+                <li><a href="allataink.html" id="allataink">Örökbefogadható állataink</a></li>
+                <li><a href="informaciok.html" id="informaciok">Információk</a></li>
+                <li><a href="galeria.html" id="galeria">Galéria</a></li>
+                <li><a href="kapcsolat.html" id="kapcsolat">Kapcsolat</a></li>
+                <li><a href="login.html" id="bejelentkezes">Bejelentkezés</a></li>
+
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
+       </nav>
+
+
+    
+    <div class="textbox">
+        <h1>Mancs Állatmenhely</h1>
+        <p>Küldetésünk, hogy minden állat megtalálja az örökbefogadó családját.</p><br>
+        <a href="#about" class="herobtn">Tudj meg Rólunk többet!</a>
+    </div>   
+    </section>
+   
+    <section id ="about" class="about">
+        <h1>Rólunk</h1>
+        <p>A legfontosabb információk menhelyünkről.</p>
+        <div class ="row">
+            <div class = "about-col">
+                <h3>Kik vagyunk?</h3>
+                <p> Mi, a Mancs Állatmenhely csapata, egy lelkes és elkötelezett csoport vagyunk, akiknek szenvedélye az állatok iránti szeretet és gondoskodás. Megnyitásunk óta elköteleztük magunkat az elhagyott, sérült és veszélyeztetett kiskedvencek megsegítésére.</p>
+            </div>
+            <div class = "about-col">
+                <h3>Kik fogadhatnak örökbe?</h3>
+                <p>Örömmel fogadunk minden 18 évnél idősebb személyt, akiknek fontos a felelős állattartás, és egy boldog, szeretetteljes otthont tudnak biztosítani a négylábú barátoknak.</p>
+            </div>
+            <div class = "about-col">
+                <h3>Hol találhattok meg minket?</h3>
+                <p>A menhely Nagykőrösön helyezkedik el, itt lehet személyesen is megnézni az állatainkat. További elérhetőséget a <a href="kapcsolat.html">Kapcsolat</a> menüpontra kattintva találnak.</p>
+            </div>
+        </div>
+    </section>
+    <section class="alapelvek">
+        
+        <h1>Legfontosabb alapelveink:</h1>
+
+            <div class="row">
+                <div class="alapelvek-col">
+                    <img src="kutya1.png">
+                    <div class="layer">
+                        <h3>Állataink jóllétének elsődlegessége</h3>
+                    </div>
+                </div>
+                
+                <div class="alapelvek-col">
+                    <img src="felelosseg.jpg">
+                    <div class="layer">
+                        <h3>Felelős örökbefogadás előmozdítása</h3>
+                    </div>
+                </div>
+                
+                <div class="alapelvek-col">
+                    <img src="nyitottsag.jpg">
+                    <div class="layer">
+                        <h3>Nyitottság és átláthatóság</h3>
+                    </div>
+                </div>
+            </div>
+     
+    </section>
+    <section class="vélemények">
+        <h1>Rólunk mondták</h1>
+        <p>Visszajelzések örökbefogadóinktól.</p>
+        <div class ="row">
+            <div class ="velemeny-col">
+                <img src="user.jpg" id="userimage">
+                <div>
+                    <p>Lelkes, hozzáértő csapat, akik mindent megtesznek a menhelyre kerülő állatkákért. A mi kutyusunk is ott élt, és bármikor ha megyünk örömmel üdvözli egykori gondozóit.</p>
+                    <h3>Ádám</h3>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+            <div class ="velemeny-col">
+                <img src="user.jpg" id="userimage">
+                <div>
+                    <p>Ajánlom azoknak, akik szeretnének egy igazán kedves közösségbe tartozni önkéntes jelleggel, vagy akik eldöntötték, hogy menhelyi kutyust vagy cicust fogadnak örökbe. </p>
+                    <h3>Szófia</h3>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>Mancs Állatmenhely</p>
+            <p>© 2024 Minden jog fenntartva.</p>
+        </div>
+    </footer>
+</body> 
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="hu" class="egyeb-oldal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Támogatás</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <section class="navbar">
+        <nav>
+        <a href="index.html"><img src="logo.png" id="logo"></a> 
+         <div class = "pages" id="links">
+             <i class="fa fa-times" onclick="menuBezaras()"></i>
+             <ul>
+                 <li><a href="index.html">Főoldal</a></li>
+                 <li><a href="allataink.html">Örökbefogadható állataink</a></li>
+                 <li><a href="informaciok.html">Információk</a></li>
+                 <li><a href="galeria.html">Galéria</a></li>
+                 <li><a href="kapcsolat.html">Kapcsolat</a></li>
+                 <li><a href="login.html">Bejelentkezés</a></li>
+ 
+             </ul>
+         </div>
+         <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
+        </nav>
+    </section>
+
+    <div class="wholeimg" id="wholeImgBox">
+        <img src="images/img1.jpg" id="wholeImg">
+        <span onclick="closeWholeImg()">X</span>
+    </div>
+
+    <div class="gallery">
+        <img src="images/img1.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img2.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img3.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img4.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img5.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img6.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img7.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img8.jpg" onclick="openWholeImg(this.src)">
+        <img src="images/img9.jpg" onclick="openWholeImg(this.src)">
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Mancs Állatmenhely</p>
+            <p>© 2024 Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+   <script>
+     var wholeImgBox=document.getElementById("wholeImgBox");
+        var wholeImg=document.getElementById("wholeImg");
+        
+        function openWholeImg(pic){
+            wholeImgBox.style.display = "flex";
+            wholeImg.src=pic;
+        }
+        
+        function closeWholeImg(){
+            wholeImgBox.style.display = "none";
+        }
+   </script>
+
+</body>
+</html>
