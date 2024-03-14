@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="hu" class="egyeb-oldal">
+<html lang="hu" class="login-oldal">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regisztráció</title>
-    <link rel = "stylesheet" href = "style.css">
+    <link rel = "stylesheet" href = "style_login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <section class="navbar">
+    <section class="header">
         <nav>
         <a href="index.html"><img src="logo.png" id="logo"></a> 
          <div class = "pages" id="links">
@@ -29,29 +29,29 @@
          </div>
          <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
         </nav>
-    </section>
+  
 
-    <div class="wholeimg" id="wholeImgBox">
-        <img src="images/img1.jpg" id="wholeImg">
-        <span onclick="closeWholeImg()">X</span>
-    </div>
-
+    <section class="wrapper">
     <form class = "login-box" action="" method="POST">
-        <div >
+        <div class ="input-box">
             <label for="felhasznalonev">Felhasználónév:</label>
+            <i class="fa fa-user" aria-hidden="true"></i>
             <input type="text" id="felhasznalonev" name="felhasznalonev" required>
         </div>
-        <div>
+        <div class ="input-box">
             <label for="email">Email:</label>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
             <input type="email" id="email" name="email" required>
         </div>
-        <div>
+        <div class="input-box">
             <label for="jelszo">Jelszó:</label>
+            <i class="fa fa-lock" aria-hidden="true"></i>
             <input type="jelszo" id="jelszo" name="jelszo" required>
         </div>
-        <button type="regisztracio">Regisztráció</button>
+        <button type="submit" class="btn">Regisztráció</button>
     </form>
-
+    </section>
+</section>
     
 
     <footer>

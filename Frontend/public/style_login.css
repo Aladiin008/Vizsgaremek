@@ -71,9 +71,6 @@ img{
     width: 100%;
 }
 
-
-
-
 .gomb ul li:hover {
     background-color: #8299cb;
     transition: 1s;
@@ -136,6 +133,7 @@ nav .fa{
     transform: translateY(-50%);
     font-size: 18px; 
     margin-right: 10px; 
+    
 }
 
 .input-box input {
@@ -149,7 +147,6 @@ nav .fa{
     padding-left: 40px; 
     box-sizing: border-box;
 }
-
 
 .input-box label {
     position: absolute;
@@ -170,6 +167,7 @@ nav .fa{
     font-size: 10px;
     color: #4683b7;  
 }
+
 footer {
     background: #fff;
     text-align: right;
@@ -194,12 +192,9 @@ footer {
     }
 }
 
-
-
 .regisztralas {
     margin-top: 20px;
 }
-
 
 .btn {
     display: inline-block;
@@ -229,6 +224,7 @@ footer {
     margin-left: 5px;
 
 }
+
 .regisztracios-link::after {
     content: '';
     display: block;
@@ -241,17 +237,73 @@ footer {
     transition: width 0.3s ease; 
 }
 
-
 .regisztracios-link:hover {
     text-decoration: underline;
 }
+
 .regisztracios-link:hover::after {
     width: 100%;
 }
-
 
 h2{
     margin-bottom: 10px;
 }
 
 
+.pages{
+    flex:1;
+    text-align: right;
+}
+
+.pages ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 6px;
+    position: relative;
+}
+
+.pages ul li a{
+    color: #121111;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.pages ul li.active::after {
+    width: 100%;
+}
+.pages ul li::after{
+    content:'';
+    width: 0%;
+    height:2px;
+    background: #4683b7;
+    display:block;
+    margin:auto;
+    transition: 0.5s;
+
+}
+
+.pages ul li:hover::after{
+    width: 100%;
+}
+
+
+.pages ul li:last-child {
+    cursor:pointer;
+    padding: 8px 12px;
+    border-radius: 15px;
+    border: 1px solid #121111;
+    color: #121111;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none; 
+    margin-left: 4px;
+}
+
+.pages ul li:last-child:hover {
+    background-color: #8299cb;
+    transition: 1s;
+}
+
+.pages ul li:last-child::after {
+    content: none;
+}
