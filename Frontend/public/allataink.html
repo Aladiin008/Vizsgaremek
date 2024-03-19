@@ -14,28 +14,51 @@
 <body>
     <section class="navbar">
         <nav>
-        <a href="index.html"><img src="logo.png" id="logo"></a> 
+         <a href="index.html"><img src="logo.png" id="logo"></a>
          <div class = "pages" id="links">
              <i class="fa fa-times" onclick="menuBezaras()"></i>
              <ul>
-                 <li><a href="index.html">Főoldal</a></li>
-                 <li><a href="allataink.html">Örökbefogadható állataink</a></li>
-                 <li><a href="informaciok.html">Információk</a></li>
-                 <li><a href="galeria.html">Galéria</a></li>
-                 <li><a href="kapcsolat.html">Kapcsolat</a></li>
-                 <li><a href="login.html">Bejelentkezés</a></li>
- 
+                <li><a href="index.html" id="fooldal">Főoldal</a></li>
+                <li><a href="allataink.html" id="allataink">Örökbefogadható állataink</a></li>
+                <li><a href="informaciok.html" id="informaciok">Információk</a></li>
+                <li><a href="galeria.html" id="galeria">Galéria</a></li>
+                <li><a href="kapcsolat.html" id="kapcsolat">Kapcsolat</a></li>
+                <li><a href="login.html" id="bejelentkezes">Bejelentkezés</a></li>
+
              </ul>
          </div>
          <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
         </nav>
     </section>
- 
+
+    <form id="searchForm">
+        <label for="fajtak">Fajták:</label>
+        <select id="fajtak" name="fajtak">
+            <option value="kutya">Kutya</option>
+            <option value="cica">Cica</option>
+        </select>
+        <br>
+        <label for="ivar">Ivar:</label>
+        <select id="ivar" name="ivar">
+            <option value="KAN">Kan</option>
+            <option value="SZUKA">Szuka</option>
+        </select>
+        <br>
+        <label for="kor">Kor:</label>
+        <input type="number" id="kor" name="kor">
+        <br>
+        <button type="submit">Keresés</button>
+        </form>
+        <div id="results"></div>
+    
+    
+
     <footer>
         <div class="footer-content">
             <p>Mancs Állatmenhely</p>
             <p>© 2024 Minden jog fenntartva.</p>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>

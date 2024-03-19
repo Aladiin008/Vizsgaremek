@@ -148,6 +148,7 @@ iframe{
     text-decoration: none;
     color:#121111;
     border: 1px solid #121111;
+    border-radius: 15px;
     padding: 12px 34px;
     font-size: 13px;
     background: transparent;
@@ -225,6 +226,7 @@ h1{
 }
 
 kh1{
+    
     font-size: 30px;
     font-weight: 600;
     
@@ -295,7 +297,39 @@ margin: 10px 0;
     box-sizing: border-box; 
 
 }
+.react{
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+    background-color: rgba(141, 174, 235, 0.4);
+    box-sizing: border-box; 
+}
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 20px;
+}
 
+@media (max-width: 600px) {
+    .App {
+        margin-top: 10px; 
+    }
+
+    .recharts-wrapper {
+        transform: scale(0.9); 
+        margin: 0 auto;
+    }
+   
+    .recharts-legend-wrapper {
+        position: relative;
+        transform: translateX(-15%);
+      }
+     
+    
+}
 
 .alapelvek-col{
     flex-basis: 28%;
@@ -319,7 +353,7 @@ margin: 10px 0;
     }
 
     .alapelvek-col {
-        max-width: 300px; /* vagy tetszőleges szélesség */
+        max-width: 300px; 
         width: 100%;
     }
 }
@@ -332,10 +366,20 @@ margin: 10px 0;
     top:0;
     left:0;
     transition: 0.5s;
+    z-index: 1;
 }
 
 .layer:hover{
-    background: rgba(141, 174, 235, 0.8);
+    transform: translateY(-5px);
+    font-size: 20px;
+}
+
+.layer h3 {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 15px;
+    position: relative;
+    z-index: 2;
 }
 
 .vélemények {
@@ -400,6 +444,13 @@ margin: 10px 0;
 
 footer {
     background: rgba(141, 174, 235, 0.4);
+    text-align: right;
+    padding: 10px;
+    color: #121111;
+}
+
+.main-footer{
+    background: rgba(255, 255, 255);
     text-align: right;
     padding: 10px;
     color: #121111;
