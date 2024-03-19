@@ -51,4 +51,25 @@ app.post('/login', bodyParser.json(), (req, res) => {
     connection.end();
 });
 
+
+app.get('/search', (req, res) => {
+    const { fajtak, ivar, kor } = req.query;
+    const connection = kapcsolat();
+
+    connection.connect();
+
+    let query = "SELECT * FROM allatok WHERE kutyacica = ? AND ivar = ? AND kora = ?";
+    let params = [fajtak, ivar, kor];
+
+    connection.query(query, params, (error, results, fields) => {
+        if (error) {
+            res.status(500).json({ error: "Hiba a keresés során" });
+        } else {
+            res.status(200).json(results);
+        }
+    });
+
+    connection.end();
+});
+
 app.listen(8080);
