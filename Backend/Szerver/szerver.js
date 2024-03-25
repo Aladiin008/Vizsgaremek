@@ -56,9 +56,6 @@ app.post('/login', bodyParser.json(), (req, res) => {
     connection.end();
 });
 
-
-
-
 app.post('/regisztracio',bodyParser.json(), (req, res) => {
     const { FelhasznaloNev, Email, Jelszo } = req.body;
     const connection = kapcsolat();
@@ -78,27 +75,6 @@ app.post('/regisztracio',bodyParser.json(), (req, res) => {
 	connection.end();
     
 });
-
-
-/*connection.connect();
-    const sql1 = kapcsolat()-> 'Select FelhasznaloNev FROM felhasznalok WHERE FelhasznaloNev = '+FelhasznaloNev +' ';
-	console.log(sql1);
-
-connection.query(sql1, [FelhasznaloNev, Email, Jelszo], (err, result) => {
-    if (FelhasznaloNev & Jelszo & Email != 0) {
-        const sqll = 'INSERT INTO felhasznalok (FelhasznaloNev, Email, Jelszo) VALUES ('+FelhasznaloNev+','+ Email+','+Jelszo+')';
-        console.log(sqll);
-    }
-    else{
-        console.error('Hibás adatok lettek megadva', err );
-    }
-
-    console.log('felhasznalo regiszt');
-    res.status(200).json({ message: 'Sikeres regisztráció' });
-});
-
-connection.end();
-*/
 
 
 
