@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="script.js"></script>
-    <script src="I:\SULI\vizsgaremek\Backend\Szerver\szerver.js"></script>
 </head>
 <body>
     <section class="header">
@@ -33,23 +31,23 @@
   
 
     <section class="wrapper">
-    <form class = "login-box" action="" method="POST">
+    <form class = "login-box" >
         <div class ="input-box">
-            <label for="felhasznalonev">Felhasználónév:</label>
+            <label for="FelhasznaloNev">Felhasználónév:</label>
             <i class="fa fa-user" aria-hidden="true"></i>
-            <input type="text" id="felhasznalonev" name="felhasznalonev" required>
+            <input type="text" id="FelhasznaloNev" name="felhasznalonev" >
         </div>
         <div class ="input-box">
-            <label for="email">Email:</label>
+            <label for="Email">Email:</label>
             <i class="fa fa-envelope" aria-hidden="true"></i>
-            <input type="email" id="email" name="email" required>
+            <input type="Email" id="Email" name="email" >
         </div>
         <div class="input-box">
-            <label for="jelszo">Jelszó:</label>
+            <label for="Jelszo">Jelszó:</label>
             <i class="fa fa-lock" aria-hidden="true"></i>
-            <input type="jelszo" id="jelszo" name="jelszo" required>
+            <input type="Jelszo" id="Jelszo" name="jelszo" >
         </div>
-        <button type="submit" class="btn">Regisztráció</button>
+        <button class="btn" onclick="Regisztracio()" >Regisztráció</button>
     </form>
     </section>
 </section>
@@ -77,18 +75,7 @@
    </script>
 
 
-<form action="http://localhost:8080/regisztracio" method="POST">
-    <label for="FelhasznaloNev">Felhasználónév:</label>
-    <input type="text" id="FelhasznaloNev" name="felhasznalonev" required><br><br>
-    
-    <label for="Email">Email:</label>
-    <input type="Email" id="email" name="email" required><br><br>
-    
-    <label for="Jelszo">Jelszó:</label>
-    <input type="password" id="Jelszo" name="jelszo" required><br><br>
-    
-    <button type="submit">Regisztráció</button>
-</form>
 
+<script src="script.js"></script>
 </body>
 </html>
