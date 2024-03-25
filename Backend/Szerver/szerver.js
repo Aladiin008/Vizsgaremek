@@ -5,11 +5,12 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 const mysql = require('mysql');
+
 
 const kapcsolat = ()=>{
     return mysql.createConnection({
@@ -33,18 +34,19 @@ app.get('/', (req,res)=>{
     connection.end();
 });
 
-app.get('/login', bodyParser.json(), (req, res) => {
-    const { email, password } = req.body;
+app.post('/login', bodyParser.json(), (req, res) => {
+    const adat = req.body;
     const connection = kapcsolat();
-
     connection.connect();
 
-    connection.query("SELECT * FROM Felhasznalok WHERE Email = ? AND Jelszo = ?", [email, password], (error, results, fields) => {
+    const cmd = `SELECT * FROM Felhasznalok WHERE Email = "${adat.email}" AND Jelszo = "${adat.password}"`;
+
+    connection.query(cmd, (error, results, fields) => {
         if (error) {
-            res.status(500).json({ error: "Hiba a bejelentkezés során" });
+            res.status(500).json({ "error": "Hiba a bejelentkezés során" });
         } else {
             if (results.length > 0) {
-                res.status(200).json({ message: "Sikeres bejelentkezés", userData: results[0] , valasz: true});
+                res.status(200).json({ "message": "Sikeres bejelentkezés", "userData": results[0] , "valasz": true});
             } else {
                 res.status(401).json({ error: "Rossz felhasználónév vagy jelszó" });
             }
@@ -54,11 +56,17 @@ app.get('/login', bodyParser.json(), (req, res) => {
     connection.end();
 });
 
-app.post('/regisztracio', (req, res) => {
-    const { FelhasznaloNev, Email, Jelszo } = req.body;
 
-    const sql = 'INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo) VALUES ('+FelhasznaloNev+','+ Email+','+Jelszo+')';
-    connection.query(sql, [FelhasznaloNev, Email, Jelszo], (err, result) => {
+
+
+app.post('/regisztracio',bodyParser.json(), (req, res) => {
+    const { FelhasznaloNev, Email, Jelszo } = req.body;
+    const connection = kapcsolat();
+
+    connection.connect();
+    const sql = 'INSERT INTO felhasznalok (FelhasznaloNev, Email, Jelszo) VALUES ("'+FelhasznaloNev+'","'+ Email+'","'+Jelszo+'")';
+	console.log(sql);
+    connection.query(sql, (err, result) => {
         if (err) {
             console.error('hiba a felhasznalo adataival:', err);
             res.status(500).json({ error: 'Hiba a regisztráció során' });
@@ -67,7 +75,30 @@ app.post('/regisztracio', (req, res) => {
         console.log('felhasznalo regiszt');
         res.status(200).json({ message: 'Sikeres regisztráció' });
     });
+	connection.end();
+    
 });
+
+
+/*connection.connect();
+    const sql1 = kapcsolat()-> 'Select FelhasznaloNev FROM felhasznalok WHERE FelhasznaloNev = '+FelhasznaloNev +' ';
+	console.log(sql1);
+
+connection.query(sql1, [FelhasznaloNev, Email, Jelszo], (err, result) => {
+    if (FelhasznaloNev & Jelszo & Email != 0) {
+        const sqll = 'INSERT INTO felhasznalok (FelhasznaloNev, Email, Jelszo) VALUES ('+FelhasznaloNev+','+ Email+','+Jelszo+')';
+        console.log(sqll);
+    }
+    else{
+        console.error('Hibás adatok lettek megadva', err );
+    }
+
+    console.log('felhasznalo regiszt');
+    res.status(200).json({ message: 'Sikeres regisztráció' });
+});
+
+connection.end();
+*/
 
 
 

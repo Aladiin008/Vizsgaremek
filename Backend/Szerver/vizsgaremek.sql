@@ -1,5 +1,5 @@
 CREATE DATABASE mancsallatmenhely default character set 'utf8' COLLATE utf8_hungarian_ci;
-
+use mancsallatmenhely;
 
 CREATE TABLE allatok (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,6 +21,7 @@ CREATE TABLE gazdik (
     utca VARCHAR(255),
 hazszam INT
 );
+
 CREATE TABLE nyomonkovetes (
     dbid INT PRIMARY KEY AUTO_INCREMENT,
     gazdaid INT,
@@ -53,7 +54,7 @@ CREATE TABLE FelhasznaloJogosultsagokKapcsolo (
 
 
 INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo)
-VALUES ('admin', 'admin@example.com', 'jelszo_hash');
+VALUES ('admin', 'admin@teszt.hu', 'admin123');
 
 
 INSERT INTO FelhasznaloJogosultsagok (JogosultsagNev)
@@ -70,7 +71,7 @@ Insert into allatok(id,kutyacica,ivar,neve,termete,szine,kora,leiras,nyomonkovet
 (2,"cica","KANDÚR  ","nudli","kicsi","foltos",1,"Barátkozós, kedves bársonytalpú. Szinte azonnal barátságot köt mindenkivel, akivel találkozik. Kezdő cicásoknak is ajánljuk.",2),
 (3,"cica","SZUKA ","Coco","kicsi","cirmos",1,"Bekuckózós bajnokunk, rendszerint a takaró alá bújik és a napja nagy részét ott tölti. Biztos, hogy egy nyugodt otthonban sokkal többet lenne szem előtt. ",3),
 (4,"cica","SZUKA ","Vivien","kicsi","cirmos",2,"Barátkozós, kedves bársonytalpú. Szinte azonnal barátságot köt mindenkivel, akivel találkozik. Kezdő cicásoknak is ajánljuk.",4),
-(5,"cica","KANDÚR  ","Milka","kicsi","FEKETE-FEHÉR",1,"Az azonnal barátkozós cicák közé tartozik. Bemegyünk hozzájuk és folyton a nyomunkban van. Azonnal barátságot köt a látogatókkal.",5)
+(5,"cica","KANDÚR  ","Milka","kicsi","FEKETE-FEHÉR",1,"Az azonnal barátkozós cicák közé tartozik. Bemegyünk hozzájuk és folyton a nyomunkban van. Azonnal barátságot köt a látogatókkal.",5);
 
 
 Insert into allatok(id,kutyacica,ivar,neve,termete,szine,kora,leiras,nyomonkovetesid)values
@@ -79,7 +80,7 @@ Insert into allatok(id,kutyacica,ivar,neve,termete,szine,kora,leiras,nyomonkovet
 (7,"kutya","KAN ","Bosco","nagy","fekete-fehér",10,"Bundás kuvasz keverék, pici bogárszemekkel, melyekből árad a szomorúság. Mintha tudná, hogy kevés az esélye gazdisodni. 10 éves elmúlt, nagyobb termetű, hosszú szőrű és mindennek a tetejébe még kissé bátortalan is.",7),
 (8,"kutya","KAN  ","Rudi","nagy","zsemle",2,"Még visszahúzódó, félénk egy kicsit, de egy nyugodt otthonban, egy türelmes gazdi mellett hamar ki tudna nyílni.",8),
 (9,"kutya","SZUKA  ","Ramida","közepes","fekete-cser",2,"RAMIDA egy nagyon kedves, 2 év körüli rottweiler kislány. Imádja és keresi az emberek társaságát, ha pedig beszélgetsz vele, ő vicces vonyító hangon válaszol.",9),
-(10,"kutya","SZUKA ","Bella","közepes","zsemle",6,"Messziről indultunk vele, mivel gazdái halála után a menhelyi környezet idegen volt a számára, nagy váltás volt a paplan melegéből a rideg menhelyi kennel, így nagyon bezárkózott.",10)
+(10,"kutya","SZUKA ","Bella","közepes","zsemle",6,"Messziről indultunk vele, mivel gazdái halála után a menhelyi környezet idegen volt a számára, nagy váltás volt a paplan melegéből a rideg menhelyi kennel, így nagyon bezárkózott.",10);
 
 Insert into gazdik(id,nev,varos,utca,hazszam)values
 (1,"Kiss Péter","Kecskemét","Sárga Krumpli",22),
