@@ -9,73 +9,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+    <script src="Backend/Szerver/szerver.js"></script>
 </head>
 <body>
     <section class="header">
         <nav>
-        <a href="index.html"><img src="logo.png" id="logo"></a> 
-         <div class = "pages" id="links">
-             <i class="fa fa-times" onclick="menuBezaras()"></i>
-             <ul>
-                 <li><a href="index.html">Főoldal</a></li>
-                 <li><a href="allataink.html">Örökbefogadható állataink</a></li>
-                 <li><a href="informaciok.html">Információk</a></li>
-                 <li><a href="galeria.html">Galéria</a></li>
-                 <li><a href="kapcsolat.html">Kapcsolat</a></li>
-                 <li><a href="login.html">Bejelentkezés</a></li>
- 
-             </ul>
-         </div>
-         <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
+            <a href="index.html"><img src="logo.png"></a>
+            <div class = "gomb" id="links">
+                <ul>
+                    <li><a href="login.html">Vissza a bejelentkezésre!</a></li>
+                </ul>
+            </div>
         </nav>
-  
 
-    <section class="wrapper">
-    <form class = "login-box" >
-        <div class ="input-box">
-            <label for="FelhasznaloNev">Felhasználónév:</label>
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <input type="text" id="FelhasznaloNev" name="felhasznalonev" >
-        </div>
-        <div class ="input-box">
-            <label for="Email">Email:</label>
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            <input type="Email" id="Email" name="email" >
-        </div>
-        <div class="input-box">
-            <label for="Jelszo">Jelszó:</label>
-            <i class="fa fa-lock" aria-hidden="true"></i>
-            <input type="Jelszo" id="Jelszo" name="jelszo" >
-        </div>
-        <input type="button" class="btn" onclick="Regisztracio()" value="Regisztráció">
 
-    </form>
+        <section class="wrapper">
+            <div class = "login-box" action="http://localhost:8080/regisztracio" method="POST">
+                <h2>Bejelentkezés</h2>
+                <form action ="#">
+                    <div class ="input-box">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <input type="text" id="FelhasznaloNev" name="felhasznalonev" required>
+                        <label for="FelhasznaloNev">Felhasználónév</label>
+                    </div>
+                    <div class ="input-box">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <input type="Email" id="Email" name="email" required>
+                        <label for="Email">Email</label>
+                    </div>
+                    <div class="input-box">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <input type="password" id="Jelszo" name="jelszo" required>
+                        <label for="Jelszo">Jelszó</label>
+                    </div>
+                    <button type="submit" class="btn" onclick="Regisztracio()" >Regisztráció</button>
+                </form>
+        </section>
     </section>
-</section>
     
-
     <footer>
         <div class="footer-content">
             <p>Mancs Állatmenhely</p>
             <p>© 2024 Minden jog fenntartva.</p>
         </div>
     </footer>
-
-   <script>
-     var wholeImgBox=document.getElementById("wholeImgBox");
-        var wholeImg=document.getElementById("wholeImg");
-        
-        function openWholeImg(pic){
-            wholeImgBox.style.display = "flex";
-            wholeImg.src=pic;
-        }
-        
-        function closeWholeImg(){
-            wholeImgBox.style.display = "none";
-        }
-   </script>
-
-
+   
 
 <script src="script.js"></script>
 </body>
