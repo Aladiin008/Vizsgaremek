@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     var navLinks = document.getElementById("links");
 
-    window.menuMegjelenites = function () {
+    window.menuMegjelenites = function() {
         navLinks.style.right = "-50%";
         ujMenu(true);
     };
 
-    window.menuBezaras = function () {
+    window.menuBezaras = function() {
         navLinks.style.right = "-100%";
         ujMenu(false);
     };
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    var currentPath = window.location.pathname.split("/").pop();
+    var currentPath = window.location.pathname.split("/").pop(); 
     var pageIds = {
         "index.html": "fooldal",
         "allataink.html": "allataink",
@@ -28,45 +28,45 @@ document.addEventListener("DOMContentLoaded", function () {
         "login.html": "bejelentkezes"
     };
 
-    var activeLinkId = pageIds[currentPath];
+   var activeLinkId = pageIds[currentPath];
     if (activeLinkId) {
         var activeLink = document.querySelector("#" + activeLinkId);
         if (activeLink) {
             activeLink.parentNode.classList.add("active");
         }
     }
-
+    
 });
 
-var wholeImgBox = document.getElementById("wholeImgBox");
-var wholeImg = document.getElementById("wholeImg");
+var wholeImgBox=document.getElementById("wholeImgBox");
+        var wholeImg=document.getElementById("wholeImg");
+        
+        function openWholeImg(pic){
+            wholeImgBox.style.display = "flex";
+            wholeImg.src=pic;
+        }
+        
+        function closeWholeImg(){
+            wholeImgBox.style.display = "none";
+        }
+        
 
-function openWholeImg(pic) {
-    wholeImgBox.style.display = "flex";
-    wholeImg.src = pic;
-}
-
-function closeWholeImg() {
-    wholeImgBox.style.display = "none";
-}
-
-
-function Kepmegjelenites() {
-    let div = document.getElementById("gallery");
-    for (let i = 1; i <= 9; i++) {
-        let img = document.createElement("img");
-        img.src = "images/img" + i + ".jpg";
-
-        img.addEventListener("click", function () {
+function Kepmegjelenites(){
+    const div = document.getElementById("gallery");
+        for(let i =1; i<=9; i++){
+            const img =document.createElement("img");
+            img.src="images/img"+i+".jpg";
+            img.className=
+            img.addEventListener("click",function(){
             openWholeImg(this.src);
-        });
-        console.log(div);
-        div.appendChild(img);
+                
+            });
+            div.appendChild(img);
+        }
     }
-}
 
 Kepmegjelenites();
-
+    
 document.getElementById('searchForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -114,11 +114,17 @@ async function Login(){
             body: JSON.stringify({ email:email, password:password })
         })
         const data = await response.json();
-        console.log(data);
+        if (data.valasz) {
+            window.location.href = "bejelentkezes.html"; 
+        } else {
+            alert("Hibás felhasználónév vagy jelszó.");
+        }
+
+        /*console.log(data);
 
         if(data.valasz)
             window.open("bejelentkezes.html");
-
+        */
        
 };
 
@@ -146,3 +152,4 @@ if (response.ok) {
 }
     
 }
+
