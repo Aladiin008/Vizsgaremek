@@ -56,26 +56,40 @@ app.post('/login', bodyParser.json(), (req, res) => {
     connection.end();
 });
 
-app.post('/regisztracio',bodyParser.json(), (req, res) => {
+
+app.post('/regisztracio', bodyParser.json(), (req, res) => {
     const { FelhasznaloNev, Email, Jelszo } = req.body;
     const connection = kapcsolat();
 
     connection.connect();
-    const sql = 'INSERT INTO felhasznalok (FelhasznaloNev, Email, Jelszo) VALUES ("'+FelhasznaloNev+'","'+ Email+'","'+Jelszo+'")';
-	console.log(sql);
-    connection.query(sql, (err, result) => {
-        if (err) {
-            console.error('hiba a felhasznalo adataival:', err);
-            res.status(500).json({ error: 'Hiba a regisztráció során' });
+
+    const checkQuery = `SELECT * FROM Felhasznalok WHERE Email = "${Email}" OR FelhasznaloNev = "${FelhasznaloNev}"`;
+    connection.query(checkQuery, (checkError, checkResults) => {
+        if (checkError) {
+            console.error('Hiba az ellenőrzés során:', checkError);
+            res.status(500).json({ error: 'Hiba az ellenőrzés során' });
+            connection.end();
             return;
         }
-        console.log('felhasznalo regiszt');
-        res.status(200).json({ message: 'Sikeres regisztráció' });
+
+        if (checkResults.length > 0) {
+            res.status(400).json({ error: 'Ezzel az email-címmel/felhasználónévvel már regisztráltak!' });
+            connection.end();
+            return;
+        }
+        
+        const insertQuery = `INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo) VALUES ("${FelhasznaloNev}", "${Email}", "${Jelszo}")`;
+        connection.query(insertQuery, (insertError, result) => {
+            if (insertError) {
+                console.error('Hiba a felhasználó adataival:', insertError);
+                res.status(500).json({ error: 'Hiba a regisztráció során' });
+                connection.end();
+                return;
+            }
+            console.log('Felhasználó sikeresen regisztrálva');
+            res.status(200).json({ message: 'Sikeres regisztráció' });
+            connection.end();
+        });
     });
-	connection.end();
-    
 });
-
-
-
 app.listen(8080);
