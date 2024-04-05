@@ -92,12 +92,15 @@ nav .fa{
         width: 100%;
         margin: 10px 0;
         text-align: center;
-        padding: 8px 0; 
+        padding: 6px 4px; 
         position: relative;
         right: 0; 
     
     }
 
+    .gomb ul li a{
+        font-size: 16px;
+    }
 }
 
 .wrapper {
@@ -157,11 +160,18 @@ nav .fa{
     color: #667;  
     transition: 0.5s;
     
-    
 }
 
 .input-box input:focus + label,
 .input-box input:valid + label {
+    top: 0;
+    transform: translate(-50%, 0);
+    font-size: 10px;
+    color: #4683b7;  
+}
+
+.input-box input[type="email"]:focus + label,
+.input-box input[type="email"]:valid + label {
     top: 0;
     transform: translate(-50%, 0);
     font-size: 10px;
@@ -173,6 +183,7 @@ footer {
     text-align: right;
     padding: 10px;
     color: #121111;
+    border-top: 2px solid #4683b7; 
 }
 
 .footer-content {
@@ -180,7 +191,9 @@ footer {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+
 }
+
 
 @media(max-width: 700px) {
     footer {
@@ -190,6 +203,7 @@ footer {
     .footer-content {
         flex-direction: column;
     }
+
 }
 
 .regisztralas {
@@ -250,7 +264,7 @@ h2{
 }
 
 
-.pages{
+/*.pages{
     flex:1;
     text-align: right;
 }
@@ -307,3 +321,4 @@ h2{
 .pages ul li:last-child::after {
     content: none;
 }
+*/

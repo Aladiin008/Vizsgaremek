@@ -139,7 +139,7 @@ iframe{
 
 .textbox p{
     margin:10 px 0 40 px;
-    font-size: 14px;
+    font-size: 16px;
     color: #121111;
 }
 
@@ -177,7 +177,9 @@ nav .fa{
         display:block;
         padding-left: 0.03%;
     }
-
+    .pages ul li a{
+        font-size: 12px;
+    }
     .pages{
         position:absolute;
         background: #4683b7;
