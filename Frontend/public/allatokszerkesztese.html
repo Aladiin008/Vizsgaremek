@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hu" class="egyeb-oldal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Információk</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+    <section class="navbar">
+        <nav>
+         <a href="index.html"><img src="logo.png" id="logo"></a>
+         <div class = "pages" id="links">
+             <i class="fa fa-times" onclick="menuBezaras()"></i>
+             <ul>
+                <li><a href="blogszerkesztes.html" id="blogszerkesztes">Blog szerkesztése</a></li>
+                <li><a href="allatokszerkesztese.html" id="allatokszerkesztese">Örökbefogadható állataink szerkesztése</a></li>
+                <li><a href="admin.html" id="admin">Adminjogosultság kapcsoló</a></li>
+                <div class="dropdown">
+                    <button class="dropbtn">Profil</button>
+                    <div class="dropdown-content">
+                      <a href="emailmodositas.html">E-mail cím módosítás</a>
+                      <a href="index.html">Kijelentkezés</a>
+                    </div>
+                </div>
+
+             </ul>
+         </div>
+         <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
+        </nav>
+    </section>
+
+    <section class="allatokwrapper">
+        <div class="admin-form">
+            <h2>Örökbefogadható állatok</h2>
+            <form id="adminForm">
+                <select id="kutya" name="kutya">
+                    <option value="0">Macska</option>
+                    <option value="1">Kutya</option>
+                </select>
+                <select id="ivar" name="ivar">
+                    <option>Szuka</option>
+                    <option>Kan</option>
+                </select>
+                <textarea id="allatneve" placeholder="Az állat neve:" required></textarea>
+                <textarea id="allattermete" placeholder="Az állat termete:" required></textarea>
+                <textarea id="allatszine" placeholder="Az állat színe:" required></textarea>
+                <textarea id="allatszine" placeholder="Az állat kora:" required></textarea>
+                <textarea id="allatleirasa" placeholder="Leírás az állatról:" required></textarea>                
+                <br><br>
+                <button type="submit" class="btn">Mentés</button>
+            </form>
+    </div>
+   </section>
+   
+    <footer>
+        <div class="footer-content">
+            <p>Mancs Állatmenhely</p>
+            <p>© 2024 Minden jog fenntartva.</p>
+        </div>
+    </footer>
+    <script src="adminscript.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galéria</title>
+    <title>Főoldal</title>
     <link rel = "stylesheet" href = "style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,40 +17,27 @@
          <div class = "pages" id="links">
              <i class="fa fa-times" onclick="menuBezaras()"></i>
              <ul>
-                <li><a href="index.html" id="fooldal">Főoldal</a></li>
-                <li><a href="allataink.html" id="allataink">Örökbefogadható állataink</a></li>
-                <li><a href="informaciok.html" id="informaciok">Információk</a></li>
-                <li><a href="galeria.html" id="galeria">Galéria</a></li>
-                <li><a href="kapcsolat.html" id="kapcsolat">Kapcsolat</a></li>
-                <li><a href="login.html" id="bejelentkezes">Bejelentkezés</a></li>
-
- 
+                <li><a href="orokbefogadas.html" id="orokbefogadas">Örökbefogadás</a></li>
+                <li><a href="segitenek.html" id="segitenek">Segítenék</a></li>
+                <div class="dropdown">
+                    <button class="dropbtn">Profil</button>
+                    <div class="dropdown-content">
+                      <a href="emailmodositas.html">E-mail cím módosítás</a>
+                      <a href="index.html">Kijelentkezés</a>
+                    </div>
+                </div>
              </ul>
          </div>
          <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
         </nav>
     </section>
-
-    <div id="gallery" class="gallery">
-        
-    </div>
-    
-    <div class="wholeimg" id="wholeImgBox">
-        <img src="images/img1.jpg" id="wholeImg">
-        <span onclick="closeWholeImg()">X</span>
-    </div>
-
    
-
     <footer>
         <div class="footer-content">
             <p>Mancs Állatmenhely</p>
             <p>© 2024 Minden jog fenntartva.</p>
         </div>
     </footer>
-
-  
-<script src="script.js"></script>
-<script src="galeria-script.js"></script>
+    <script src="userscript.js"></script>
 </body>
 </html>

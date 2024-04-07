@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (orokbefogadhatoLink) {
             orokbefogadhatoLink.innerHTML = megjelenitve ? "Örökbefogadható<br> állataink" : "Örökbefogadható állataink";
         }
+
     };
 
     var currentPath = window.location.pathname.split("/").pop(); 
@@ -25,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
         "informaciok.html": "informaciok",
         "galeria.html": "galeria",
         "kapcsolat.html": "kapcsolat",
-        "login.html": "bejelentkezes"
+        "login.html": "bejelentkezes",
+
     };
 
    var activeLinkId = pageIds[currentPath];
@@ -38,36 +40,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
 });
 
-var wholeImgBox=document.getElementById("wholeImgBox");
-        var wholeImg=document.getElementById("wholeImg");
-        
-        function openWholeImg(pic){
-            wholeImgBox.style.display = "flex";
-            wholeImg.src=pic;
-        }
-        
-        function closeWholeImg(){
-            wholeImgBox.style.display = "none";
-        }
-        
 
-function Kepmegjelenites(){
-    const div = document.getElementById("gallery");
-        for(let i =1; i<=9; i++){
-            const img =document.createElement("img");
-            img.src="images/img"+i+".jpg";
-            img.className=
-            img.addEventListener("click",function(){
-            openWholeImg(this.src);
-                
-            });
-            div.appendChild(img);
-        }
-    }
-
-Kepmegjelenites();
     
-document.getElementById('searchForm').addEventListener('submit', async (event) => {
+/*document.getElementById('searchForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
@@ -101,3 +76,4 @@ document.getElementById('searchForm').addEventListener('submit', async (event) =
     }
 });
 
+*/
