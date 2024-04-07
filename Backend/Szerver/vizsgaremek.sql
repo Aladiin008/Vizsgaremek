@@ -62,7 +62,7 @@ CREATE TABLE elozoev(
 CREATE TABLE Velemenyek (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Nev VARCHAR(255) NOT NULL,
-    Velemeny TEXT NOT NULL
+    Velemeny VARCHAR(255) NOT NULL
 );
 
 INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)VALUES 
