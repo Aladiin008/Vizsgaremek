@@ -172,4 +172,25 @@ app.post('/velemenyek', (req, res) => {
       connection.end();
     });
   });
+
+  app.post('/allatokszerkesztese', bodyParser.json(), (req, res) => {
+    const { kutya, ivar, allatneve, allattermete, allatszine, allatkora, allatleirasa } = req.body;
+    const connection = kapcsolat();
+
+    connection.connect();
+
+    const adatok = `INSERT INTO allatok (kutya, ivar, nev, termet, szin, kor, leiras) VALUES("${kutya}", "${ivar}", "${allatneve}"), "${allattermete}", "${allatszine}", "${allatkora}", "${allatleirasa}"`;
+
+    connection.query(adatok, [kutya, ivar, allatneve, allattermete, allatszine, allatkora, allatleirasa], (error, results) => {
+        if (error) {
+            console.error('Hiba történt az állat hozzáadása során:', error);
+            res.status(500).json({ error: 'Hiba történt az állat hozzáadása során.' });
+        } else {
+            console.log('Állat sikeresen hozzáadva.');
+            res.status(200).json({ message: 'Állat sikeresen hozzáadva.' });
+        }
+        connection.end();
+    });
+});
+
 app.listen(8080);
