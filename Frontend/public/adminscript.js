@@ -38,5 +38,43 @@ document.addEventListener("DOMContentLoaded", function() {
             activeLink.parentNode.classList.add("active");
         }
     }
+    async function allatokszerkesztese(){
+        adminForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+        
+            const kutya = document.querySelector("select[name='kutya']").value;
+            const ivar = document.querySelector("select[name='ivar']").value;
+            const allatneve = document.querySelector("textarea[name='allatneve']").value;
+            const allattermete = document.querySelector("textarea[name='allattermete']").value;
+            const allatszine = document.querySelector("textarea[name='allatszine']").value;
+            const allatkora = document.querySelector("textarea[name='allatkora']").value;
+            const allatleirasa = document.querySelector("textarea[name='allatleirasa']").value;
+        
+            var data = {
+                kutya: kutya,
+                ivar: ivar,
+                nev: allatneve,
+                termet: allattermete,
+                szin: allatszine,
+                kor: allatkora,
+                leiras: allatleirasa
+            };
+        
+            fetch('http://localhost:8080/allatokszerkesztese', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Sikeres mentés:', data);
+            })
+            .catch((error) => {
+                console.error('Hiba történt:', error);
+            });
+        })};
+    
     
 });
