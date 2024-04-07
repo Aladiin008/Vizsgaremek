@@ -7,7 +7,9 @@ CREATE TABLE gazdik (
     varos VARCHAR(255),
     utca VARCHAR(255),
     hazszam INT,
-    telefonszam VARCHAR(20)
+    telefonszam VARCHAR(20),
+    felhasznalo_id INT,
+    FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID);
 );
 
 CREATE TABLE allatok (
@@ -28,7 +30,8 @@ CREATE TABLE Felhasznalok (
     FelhasznaloNev VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL,
     Jelszo VARCHAR(50) NOT NULL,
-    adminjogosultsag BOOLEAN DEFAULT FALSE
+    adminjogosultsag BOOLEAN DEFAULT FALSE,
+    
 );
 
 CREATE TABLE orokbefogadas (
@@ -40,6 +43,26 @@ CREATE TABLE orokbefogadas (
     FOREIGN KEY (gazda_id) REFERENCES gazdik(id)
 );
 
+CREATE TABLE elozoev(
+    honapok VARCHAR(50),
+    osszallat INT,
+    kutyak INT
+);
+
+CREATE TABLE Velemenyek (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nev VARCHAR(255) NOT NULL,
+    Velemeny TEXT NOT NULL
+);
+
+CREATE TABLE Onkentesek(
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    nev VARCHAR(255),
+    telefonszam VARCHAR(20),
+    kozepiskolas BOOLEAN,
+    felhasznalo_id INT,
+    FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID);
+)
 
 
 INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)
@@ -62,3 +85,11 @@ INSERT INTO gazdik (nev, varos, utca, hazszam, telefonszam) VALUES
 INSERT INTO orokbefogadas (allat_id, gazda_id, orokbefogadas_datum) VALUES
 (1, 1, '2023-05-10'),
 (3, 2, '2023-04-20');
+
+INSERT INTO elozoev(honapok, osszallat, kutyak) VALUES
+('Január', 5, 2),
+('Február', 6, 5),
+('Március', 2, 2),
+('Április', 8, 6),
+('Május', 4, 3),
+('Június', 5, 4);

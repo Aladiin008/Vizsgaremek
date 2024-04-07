@@ -7,7 +7,7 @@ app.use(cors());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 const mysql = require('mysql');
 
@@ -35,25 +35,30 @@ app.get('/', (req,res)=>{
 });
 
 app.post('/login', bodyParser.json(), (req, res) => {
-    const adat = req.body;
+    const { email, password } = req.body;
     const connection = kapcsolat();
+
     connection.connect();
 
-    const cmd = `SELECT * FROM Felhasznalok WHERE Email = "${adat.email}" AND Jelszo = "${adat.password}"`;
+    const cmd = `SELECT * FROM Felhasznalok WHERE Email = "${email}" AND Jelszo = "${password}"`;
 
     connection.query(cmd, (error, results, fields) => {
         if (error) {
             res.status(500).json({ "error": "Hiba a bejelentkezés során" });
         } else {
             if (results.length > 0) {
-                res.status(200).json({ "message": "Sikeres bejelentkezés", "userData": results[0] , "valasz": true});
+                const user = results[0];
+                if (user.adminjogosultsag === 1) {
+                    res.status(200).json({ "message": "Sikeres bejelentkezés", "user": user, "isAdmin": true });
+                } else {
+                    res.status(200).json({ "message": "Sikeres bejelentkezés", "user": user, "isAdmin": false });
+                }
             } else {
                 res.status(401).json({ error: "Rossz felhasználónév vagy jelszó" });
             }
         }
+        connection.end();
     });
-
-    connection.end();
 });
 
 
@@ -92,4 +97,79 @@ app.post('/regisztracio', bodyParser.json(), (req, res) => {
         });
     });
 });
+
+app.get('/data', (req, res) => {
+    const connection = kapcsolat();
+    connection.connect();
+
+    const query = `SELECT honapok, osszallat, kutyak FROM elozoev`;
+    
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Hiba az adatok lekérdezése során:', error);
+            res.status(500).json({ error: 'Hiba az adatok lekérdezése során' });
+        } else {
+            console.log('Adatok sikeresen lekérdezve');
+            res.status(200).json(results);
+        }
+        connection.end();
+    });
+});
+
+app.post('/admin/update', bodyParser.json(), (req, res) => {
+    const { email, adminjogosultsag } = req.body;
+    const connection = kapcsolat();
+
+    connection.connect();
+
+    if (typeof adminjogosultsag !== 'boolean') {
+        return res.status(400).json({ error: 'Az adminjogosultsag mező értéke nem valós boolean.' });
+    }
+
+    const updateQuery = `UPDATE Felhasznalok SET adminjogosultsag = ${adminjogosultsag ? 1 : 0} WHERE Email = "${email}"`;
+
+    connection.query(updateQuery, (error, results) => {
+        if (error) {
+            console.error('Hiba történt az adminjogosultság frissítése során:', error);
+            res.status(500).json({ error: 'Hiba történt az adminjogosultság frissítése során.' });
+        } else {
+            console.log('Adminjogosultság sikeresen frissítve.');
+            res.status(200).json({ message: 'Adminjogosultság sikeresen frissítve.' });
+        }
+        connection.end();
+    });
+});
+
+app.post('/velemenyek', (req, res) => {
+    const connection = kapcsolat();
+    const { nev, velemeny } = req.body;
+    const insertQuery = `INSERT INTO Velemenyek (Nev, Velemeny) VALUES (?, ?)`;
+  
+    connection.query(insertQuery, [nev, velemeny], (error, results) => {
+      if (error) {
+        console.error('Hiba a vélemény mentése során:', error);
+        res.status(500).json({ error: 'Hiba a vélemény mentése során' });
+      } else {
+        console.log('Vélemény sikeresen mentve');
+        res.status(200).json({ message: 'Vélemény sikeresen mentve' });
+      }
+      connection.end();
+    });
+  });
+  
+  app.get('/legfrissebb_velemenyek', (req, res) => {
+    const connection = kapcsolat();
+    const selectQuery = `SELECT * FROM Velemenyek ORDER BY Datum DESC LIMIT 5`;
+  
+    connection.query(selectQuery, (error, results) => {
+      if (error) {
+        console.error('Hiba az adatok lekérdezése során:', error);
+        res.status(500).json({ error: 'Hiba az adatok lekérdezése során' });
+      } else {
+        console.log('Legfrissebb vélemények sikeresen lekérdezve');
+        res.status(200).json(results);
+      }
+      connection.end();
+    });
+  });
 app.listen(8080);
