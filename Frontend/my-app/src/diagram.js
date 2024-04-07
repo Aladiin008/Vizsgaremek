@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-const data = [
-  { name: 'Január', uv: 5, pv: 2, amt: 10 },
-  { name: 'Február', uv: 6, pv: 5, amt: 10 },
-  { name: 'Március', uv: 2, pv: 2, amt: 10 },
-  { name: 'Április', uv: 8, pv: 6, amt: 10 },
-  { name: 'Május', uv: 4, pv: 3, amt: 10 },
-  { name: 'Június', uv: 5, pv: 4, amt: 10 },
-  
-];
-
 function Diagram() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/data');
+      if (!response.ok) {
+        throw new Error('Hiba az adatok lekérdezése során');
+      }
+      const jsonData = await response.json();
+      const formazottData = jsonData.map(item => ({
+        name: item.honapok,
+        uv: item.osszallat,
+        pv: item.kutyak
+      }));
+      setData(formazottData);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+
   return (
     <BarChart width={600} height={300} data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
       <CartesianGrid strokeDasharray="3 3" />
