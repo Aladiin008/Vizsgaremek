@@ -1,17 +1,6 @@
 CREATE DATABASE mancsallatmenhely DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
 USE mancsallatmenhely;
 
-CREATE TABLE gazdik (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nev VARCHAR(255),
-    varos VARCHAR(255),
-    utca VARCHAR(255),
-    hazszam INT,
-    telefonszam VARCHAR(20),
-    felhasznalo_id INT,
-    FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID);
-);
-
 CREATE TABLE allatok (
     id INT PRIMARY KEY AUTO_INCREMENT,
     kutya BOOLEAN,
@@ -24,14 +13,35 @@ CREATE TABLE allatok (
     orokbefogadott BOOLEAN DEFAULT FALSE
 );
 
-
 CREATE TABLE Felhasznalok (
     FelhasznaloID INT PRIMARY KEY AUTO_INCREMENT,
     FelhasznaloNev VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL,
     Jelszo VARCHAR(50) NOT NULL,
-    adminjogosultsag BOOLEAN DEFAULT FALSE,
-    
+    adminjogosultsag BOOLEAN DEFAULT FALSE   
+);
+
+
+CREATE TABLE Onkentesek(
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    nev VARCHAR(255),
+    telefonszam VARCHAR(20),
+    kozepiskolas BOOLEAN,
+    felhasznalo_id INT,
+    FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID)
+);
+
+
+
+CREATE TABLE gazdik (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nev VARCHAR(255),
+    varos VARCHAR(255),
+    utca VARCHAR(255),
+    hazszam INT,
+    telefonszam VARCHAR(20),
+    felhasznalo_id INT,
+    FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID)
 );
 
 CREATE TABLE orokbefogadas (
@@ -55,18 +65,8 @@ CREATE TABLE Velemenyek (
     Velemeny TEXT NOT NULL
 );
 
-CREATE TABLE Onkentesek(
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    nev VARCHAR(255),
-    telefonszam VARCHAR(20),
-    kozepiskolas BOOLEAN,
-    felhasznalo_id INT,
-    FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID);
-)
-
-
-INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)
-VALUES ('admin', 'admin@teszt.hu', 'admin123', TRUE);
+INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)VALUES 
+('admin', 'admin@teszt.hu', 'admin123', TRUE);
 
 INSERT INTO allatok (kutya, ivar, nev, termet, szin, kor, leiras) VALUES
 (TRUE, 'szuka', 'Bodri', 'kicsi', 'barna', 3, 'Még visszahúzódó, félénk egy kicsit, de egy nyugodt otthonban, egy türelmes gazdi mellett hamar meg tudna nyílni.'),
