@@ -26,10 +26,12 @@ async function jelszomodositas(event) {
         });
 
         const responseData = await response.json();
+        console.log(responseData);
 
         if (response.ok) {
             const newData = {
                 email: email,
+                regijelszo:regijelszo,
                 ujjelszo: ujjelszo
             };
 
@@ -42,6 +44,7 @@ async function jelszomodositas(event) {
             });
 
             const updateResponseData = await updateResponse.json();
+            console.log(updateResponseData);
 
             if (updateResponse.ok) {
                 alert("Sikeres jelszó módosítás!");
