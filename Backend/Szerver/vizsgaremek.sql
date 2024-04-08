@@ -3,9 +3,9 @@ USE mancsallatmenhely;
 
 CREATE TABLE allatok (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    kutya BOOLEAN,
+    kutya BOOLEAN DEFAULT FALSE,
     ivar VARCHAR(10),
-    nev VARCHAR(255),
+    allatnev VARCHAR(255),
     termet VARCHAR(255),
     szin VARCHAR(255),
     kor INT,
@@ -13,29 +13,30 @@ CREATE TABLE allatok (
     orokbefogadott BOOLEAN DEFAULT FALSE
 );
 
+
 CREATE TABLE Felhasznalok (
     FelhasznaloID INT PRIMARY KEY AUTO_INCREMENT,
     FelhasznaloNev VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL,
     Jelszo VARCHAR(50) NOT NULL,
-    adminjogosultsag BOOLEAN DEFAULT FALSE   
+    adminjogosultsag BOOLEAN DEFAULT FALSE
+    
 );
-
 
 CREATE TABLE Onkentesek(
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    nev VARCHAR(255),
-    telefonszam VARCHAR(20),
+    onkentesnev VARCHAR(255),
+    onkentesemail VARCHAR(255),
+    telszam VARCHAR(20),
     kozepiskolas BOOLEAN,
     felhasznalo_id INT,
     FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID)
 );
 
 
-
 CREATE TABLE gazdik (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nev VARCHAR(255),
+    gazdinev VARCHAR(255),
     varos VARCHAR(255),
     utca VARCHAR(255),
     hazszam INT,
@@ -65,10 +66,13 @@ CREATE TABLE Velemenyek (
     Velemeny VARCHAR(255) NOT NULL
 );
 
-INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)VALUES 
-('admin', 'admin@teszt.hu', 'admin123', TRUE);
 
-INSERT INTO allatok (kutya, ivar, nev, termet, szin, kor, leiras) VALUES
+
+
+INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)
+VALUES ('admin', 'admin@teszt.hu', 'admin123', TRUE);
+
+INSERT INTO allatok (kutya, ivar, allatnev, termet, szin, kor, leiras) VALUES
 (TRUE, 'szuka', 'Bodri', 'kicsi', 'barna', 3, 'Még visszahúzódó, félénk egy kicsit, de egy nyugodt otthonban, egy türelmes gazdi mellett hamar meg tudna nyílni.'),
 (FALSE, 'szuka', 'Gombóc', 'kicsi', 'cirmos', 1, 'Barátkozós, kedves bársonytalpú. Szinte azonnal barátságot köt mindenkivel, akivel találkozik. Kezdő cicásoknak is ajánljuk.'),
 (TRUE, 'kan', 'Coco', 'közepes', 'fehér', 5, 'Barátságos és aktív kutya, szeret sétálni, játszani.'),
@@ -76,7 +80,7 @@ INSERT INTO allatok (kutya, ivar, nev, termet, szin, kor, leiras) VALUES
 (TRUE, 'kan', 'Morzsi', 'kicsi', 'szürke', 4, 'Kis termetű és igazán tekintélyt parancsoló kiállású kutya. Nem rögtön, de pár alkalom után már magától bújik egy kis simogatásért.');
 
 
-INSERT INTO gazdik (nev, varos, utca, hazszam, telefonszam) VALUES
+INSERT INTO gazdik (gazdinev, varos, utca, hazszam, telefonszam) VALUES
 ('Kiss Péter', 'Kecskemét', 'Sárga Krumpli', 22, '123456789'),
 ('Nagy Dominika', 'Budapest', 'Kék út', 5, '987654321'),
 ('Kovács János', 'Debrecen', 'Zöld tér', 10, '1122334455');

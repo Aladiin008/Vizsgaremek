@@ -140,57 +140,115 @@ app.post('/admin/update', bodyParser.json(), (req, res) => {
     });
 });
 
-app.post('/velemenyek', (req, res) => {
-    const connection = kapcsolat();
+app.post('/velemenyek', bodyParser.json(), (req, res) => {
     const { nev, velemeny } = req.body;
-    const insertQuery = `INSERT INTO Velemenyek (Nev, Velemeny) VALUES (?, ?)`;
-  
-    connection.query(insertQuery, [nev, velemeny], (error, results) => {
+    const connection = kapcsolat();
+    connection.connect();
+
+    const insertQuery = `INSERT INTO Velemenyek (Nev, Velemeny) VALUES  ("${nev}", "${velemeny}")`;
+
+    connection.query(insertQuery, (error, result) => {
       if (error) {
-        console.error('Hiba a vélemény mentése során:', error);
+        console.error('Hiba a vélemény mentése során:', error); 
         res.status(500).json({ error: 'Hiba a vélemény mentése során' });
       } else {
         console.log('Vélemény sikeresen mentve');
-        res.status(200).json({ message: 'Vélemény sikeresen mentve' });
+        res.status(200).json({result});
       }
       connection.end();
     });
-  });
+});
   
-  app.get('/legfrissebb_velemenyek', (req, res) => {
+app.get('/legfrissebb_velemenyek', (req, res) => {
     const connection = kapcsolat();
-    const selectQuery = `SELECT * FROM Velemenyek ORDER BY Datum DESC LIMIT 5`;
+    connection.connect();
+    const selectQuery = `SELECT * FROM Velemenyek ORDER BY ID DESC LIMIT 3`;
   
-    connection.query(selectQuery, (error, results) => {
+    connection.query(selectQuery, (error, result) => {
       if (error) {
         console.error('Hiba az adatok lekérdezése során:', error);
         res.status(500).json({ error: 'Hiba az adatok lekérdezése során' });
       } else {
         console.log('Legfrissebb vélemények sikeresen lekérdezve');
-        res.status(200).json(results);
+        res.status(200).json(result);
       }
       connection.end();
     });
-  });
+});
 
-  app.post('/allatokszerkesztese', bodyParser.json(), (req, res) => {
-    const { kutya, ivar, allatneve, allattermete, allatszine, allatkora, allatleirasa } = req.body;
+app.post('/jelentkezes', bodyParser.json(), (req, res) => {
+    const { onkentesnev, onkentesemail, telszam, kozepiskolas } = req.body;
     const connection = kapcsolat();
-
     connection.connect();
 
-    const adatok = `INSERT INTO allatok (kutya, ivar, nev, termet, szin, kor, leiras) VALUES("${kutya}", "${ivar}", "${allatneve}"), "${allattermete}", "${allatszine}", "${allatkora}", "${allatleirasa}"`;
+    let kozepiskolasBool = false;
 
-    connection.query(adatok, [kutya, ivar, allatneve, allattermete, allatszine, allatkora, allatleirasa], (error, results) => {
+    if (kozepiskolas === '1') {
+        kozepiskolasBool = true;
+    }
+
+    const insertQuery = `INSERT INTO Onkentesek (onkentesnev, onkentesemail, telszam, kozepiskolas) VALUES ("${onkentesnev}", "${onkentesemail}", "${telszam}", ${kozepiskolas})`;
+
+    connection.query(insertQuery, (error, result) => {
         if (error) {
-            console.error('Hiba történt az állat hozzáadása során:', error);
-            res.status(500).json({ error: 'Hiba történt az állat hozzáadása során.' });
+            console.error('Hiba a jelentkezés mentése során:', error);
+            res.status(500).json({ error: 'Hiba a jelentkezés mentése során' });
         } else {
-            console.log('Állat sikeresen hozzáadva.');
-            res.status(200).json({ message: 'Állat sikeresen hozzáadva.' });
+            console.log('Jelentkezés sikeresen mentve');
+            res.status(200).json({ message: 'Jelentkezés sikeresen mentve' });
         }
         connection.end();
     });
+});
+
+app.post('/allatokszerkesztese', bodyParser.json(), (req, res) => {
+    const { kutya, ivar, allatneve, allattermete, allatszine, allatkora, allatleirasa } = req.body;
+    const connection = kapcsolat();
+    connection.connect();
+
+    let kutyaBool = false;
+
+    if (kutya === '1') {
+        kutyaBool = true;
+    }
+
+    const insertQuery = `INSERT INTO allatok (kutya, ivar, allatnev, termet, szin, kor, leiras ) VALUES (${kutya}, "${ivar}", "${allatneve}", "${allattermete}", "${allatszine}", "${allatkora}", "${allatleirasa}")`;
+
+    connection.query(insertQuery, (error, result) => {
+        if (error) {
+            console.error('Hiba a mentés során:', error);
+            res.status(500).json({ error: 'Hiba a mentés során' });
+        } else {
+            console.log('Állat sikeresen mentve');
+            res.status(200).json({ message: 'Állat sikeresen mentve' });
+        }
+        connection.end();
+    });
+});
+
+app.post('/kereses', (req, res) => {
+    const { kutyakereses, ivarkereses, korkereses } = req.body;
+    const connection = kapcsolat();
+    connection.connect();
+
+    let kutyakeresesBool = false;
+    if (kutyakereses === '1') {
+        kutyakeresesBool = true;
+    }
+    
+    const allatok = `SELECT * FROM allatok WHERE kutya = ${kutyakereses} AND ivar = "${ivarkereses}" AND kor = ${korkereses}`;
+    
+    connection.query(allatok, (error, result) => {
+            if (error) {
+                console.error('Hiba a keresés során:', error);
+                res.status(500).json({ error: 'Hiba a keresés során' });
+            } else {
+                console.log('Sikeres keresés');
+                res.status(200).json(result);
+            }
+            connection.end();
+    });
+    
 });
 
 app.listen(8080);
