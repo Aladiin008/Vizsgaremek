@@ -31,27 +31,34 @@
         </nav>
     </section>
 
-    <form id="searchForm">
-        <label for="fajtak">Fajták:</label>
-        <select id="fajtak" name="fajtak">
-            <option value="kutya">Kutya</option>
-            <option value="cica">Cica</option>
-        </select>
-        <br>
-        <label for="ivar">Ivar:</label>
-        <select id="ivar" name="ivar">
-            <option value="KAN">Kan</option>
-            <option value="SZUKA">Szuka</option>
-        </select>
-        <br>
-        <label for="kor">Kor:</label>
-        <input type="number" id="kor" name="kor">
-        <br>
-        <button type="submit">Keresés</button>
-        </form>
-        <div id="results"></div>
-    
-    
+    <section class="allatokwrapper">
+        <div class="admin-form">
+            <h2>Örökbefogadható állatok</h2>
+            <form id="adminForm">
+                <label>Kutya/macska</label>
+                <select id="kutyakereses" name="kutya">
+                    <option value="0">Macska</option>
+                    <option value="1">Kutya</option>
+                </select>
+                <label>Ivar:</label>
+                <select id="ivarkereses" name="ivar">
+                    <option>Szuka</option>
+                    <option>Kan</option>
+                </select>
+                <label>Kor:</label>
+                <input type="number" id="korkereses" name="kor">
+                <button type="submit" class="btn" onclick="allataink(event)">Keresés</button>
+            </form>
+        </div>
+    </section>
+    <div class="allatainkcim">
+        <h1>A keresésednek megfelelő állatok:</h1>
+        <p>Ha megtetszett valamelyik négylábúnk, jelentkezz be és add le örökbefogadási igényed!</p>
+    </div>
+        
+    <section class="orokbefogadhato-wrapper">
+            
+    </section>
 
     <footer>
         <div class="footer-content">
@@ -60,5 +67,7 @@
         </div>
     </footer>
     <script src="script.js"></script>
+    <script src="allataink.js"></script>
+
 </body>
 </html>

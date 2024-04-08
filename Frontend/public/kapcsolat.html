@@ -39,14 +39,13 @@
         <h2>E-mail cím: mancsallatmenhely@gmail.com</h2>
         <h2>Nyitvatartás: Hétfőtől szombatig 10 és 17 óra között.
         <h2>Cím: 2750 Nagykőrös</h2>
-        <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d348175.7954139774!2d19.179452653736753!3d47.01818272679309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474162db142a76e9%3A0x400c4290c1e13a0!2zTmFneWvFkXLDtnMsIDI3NTA!5e0!3m2!1shu!2shu!4v1709476426342!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
-
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d187821.7789590195!2d19.609593775111215!3d47.01807578143839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474162db142a76e9%3A0x400c4290c1e13a0!2zTmFneWvFkXLDtnMsIDI3NTA!5e0!3m2!1shu!2shu!4v1712520961020!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <section class="velemenyek-wrapper">
         <h1>Írd meg nekünk a véleményed menhelyünkről!</h1>
         <div class="velemeny-form">
-            <form id="velemeny-form">
+            <form id="velemeny-form" onsubmit="event.preventDefault(); Velemeny()">
                 <textarea id="velemeny" placeholder="Írd ide a véleményed..." required></textarea>
                 <input type="text" id="nev" placeholder="Név" required>
                 <button type="submit" class="btn">Küldés</button>
@@ -54,12 +53,14 @@
         </div>
     </section>
 
+    <div class="cim">
+    <h1>Ti írtátok</h1>
+    </div>
+    
     <section class="tiirtatok-wrapper">
-        <div class="velemeny">
-            <div class="szoveg"></div>
-            <div class="nev"></div>
-        </div>
+        
     </section>
+       
     <footer>
         <div class="footer-content">
             <p>Mancs Állatmenhely</p>

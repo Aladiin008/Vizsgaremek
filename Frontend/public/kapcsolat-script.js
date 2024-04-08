@@ -2,8 +2,7 @@ window.onload = function() {
     LegfrissebbVelemenyek(); 
 }
 
-document.getElementById('velemeny-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
+async function Velemeny() {
     const nev = document.getElementById('nev').value;
     const velemeny = document.getElementById('velemeny').value;
 
@@ -13,12 +12,14 @@ document.getElementById('velemeny-form').addEventListener('submit', async (event
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nev: nev, velemeny: velemeny })
+            body: JSON.stringify({ nev:nev, velemeny:velemeny })
         });
 
         if (response.ok) {
             alert('Vélemény sikeresen elküldve.');
             LegfrissebbVelemenyek(); 
+            window.location.href = "kapcsolat.html";
+
         } else {
             const data = await response.json();
             alert(data.error || 'Hiba történt a küldés során.');
@@ -27,13 +28,12 @@ document.getElementById('velemeny-form').addEventListener('submit', async (event
         console.error('Hiba történt a kérés során:', error);
         alert('Hiba történt a kérés során.');
     }
-});
+}
 
 async function LegfrissebbVelemenyek() {
     try {
-        const response = await fetch('http://127.0.0.1:8080/legfrissebb_velemenyek');
+        const response = await fetch('http://localhost:8080/legfrissebb_velemenyek');
         const velemenyek = await response.json();
-
         const tiirtatok = document.querySelector('.tiirtatok-wrapper');
         tiirtatok.innerHTML = '';
 
@@ -49,10 +49,9 @@ async function LegfrissebbVelemenyek() {
             szovegElem.classList.add('szoveg');
             szovegElem.textContent = velemeny.Velemeny;
 
-           
             velemenyElem.appendChild(szovegElem);
             velemenyElem.appendChild(nevElem);
-            
+
             tiirtatok.appendChild(velemenyElem);
         });
         

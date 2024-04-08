@@ -22,34 +22,13 @@
                 <li><a href="allatokszerkesztese.html" id="allatokszerkesztese">Örökbefogadható állataink szerkesztése</a></li>
                 <li><a href="admin.html" id="admin">Adminjogosultság kapcsoló</a></li>
                 <li><a href="login.html" id="bejelentkezes">Kijelentkezés</a></li>
+
+
              </ul>
          </div>
          <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
         </nav>
     </section>
-
-    <section class="allatokwrapper">
-        <div class="admin-form">
-            <h2>Örökbefogadható állatok</h2>
-            <form id="adminForm">
-                <select id="kutya" name="kutya">
-                    <option value="0">Macska</option>
-                    <option value="1">Kutya</option>
-                </select>
-                <select id="ivar" name="ivar">
-                    <option>Szuka</option>
-                    <option>Kan</option>
-                </select>
-                <textarea id="allatneve" placeholder="Az állat neve:" required></textarea>
-                <textarea id="allattermete" placeholder="Az állat termete:" required></textarea>
-                <textarea id="allatszine" placeholder="Az állat színe:" required></textarea>
-                <textarea id="allatkora" placeholder="Az állat kora:" required></textarea>
-                <textarea id="allatleirasa" placeholder="Leírás az állatról:" required></textarea>                
-                <br><br>
-                <button type="submit" class="btn" onclick="allatokszerkesztese(event)">Mentés</button>
-            </form>
-    </div>
-   </section>
    
     <footer>
         <div class="footer-content">
@@ -58,6 +37,5 @@
         </div>
     </footer>
     <script src="adminscript.js"></script>
-    <script src="allatokszerkesztese.js"></script>
 </body>
 </html>

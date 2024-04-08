@@ -22,7 +22,7 @@
                 <div class="dropdown">
                     <button class="dropbtn">Profil</button>
                     <div class="dropdown-content">
-                      <a href="emailmodositas.html">E-mail cím módosítás</a>
+                      <a href="jelszomodositas.html">Jelszó módosítás</a>
                       <a href="index.html">Kijelentkezés</a>
                     </div>
                 </div>
@@ -32,6 +32,29 @@
         </nav>
     </section>
    
+    <section id ="about" class="about">
+        <h1>Szeretnél segíteni a menhelynek?</h1>
+        <p>Menhelyünkön szívesen fogadunk önkénteseket. Sok iskolával szerződésben vagyunk, hogy a középiskolai diákok nálunk is eltölthessék az ötven óra kötelező közösségi szolgálatot.
+        Természetesen felnőtteket is várunk, amennyiben szeretnének az állatainkkal foglalkozni és a menhely munkatársainak segíteni. </p>
+        <p>Az alábbi form kitöltésével tudod a jelentkezésedet leadni. A beküldés után telefonon felvesszük veled a kapcsolatot.</p>
+        <section class="allatokwrapper">
+            <div class="admin-form">
+                <h2>Jelentkezés leadása</h2>
+                <form id="adminForm">
+                    <textarea id="onkentesnev" placeholder="Név" required></textarea>
+                    <textarea id="onkentesemail" placeholder="E-mail cím" required></textarea>
+                    <textarea id="telszam" placeholder="Telefonszám" required></textarea>
+                    <select id="kozepiskolas" name="kozepiskolas">
+                        <option value="0">Önkénteskedni szeretnék</option>
+                        <option value="1">Közösségi szolgálatot szeretnék teljesíteni</option>
+                    </select>            
+                    <br><br>
+                    <button type="submit" class="btn" onclick='jelentkezes(event)' >Jelentkezés leadása</button>
+                </form>
+        </div>
+       </section>
+    </section>
+
     <footer>
         <div class="footer-content">
             <p>Mancs Állatmenhely</p>
@@ -39,5 +62,7 @@
         </div>
     </footer>
     <script src="userscript.js"></script>
+    <script src="segitenek.js"></script>
+
 </body>
 </html>
