@@ -15,9 +15,13 @@ document.getElementById('adminForm').addEventListener('submit', async (event) =>
 
         if (response.ok) {
             alert('Adminjogosultság sikeresen frissítve.');
+            window.location.href="admin.html";
+
         } else {
             const data = await response.json();
             alert(data.error || 'Hiba történt a frissítés során.');
+            window.location.href="admin.html";
+
         }
     } catch (error) {
         console.error('Hiba történt a kérés során:', error);
