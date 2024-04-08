@@ -18,12 +18,30 @@
          <div class = "pages" id="links">
              <i class="fa fa-times" onclick="menuBezaras()"></i>
              <ul>
-                <li><a href="orokbefogadas.html".html" id="orokbefogadas">Vissza a főoldalra!</a></li>
+                <li><a href="orokbefogadas.html".html " id="orokbefogadas">Vissza a főoldalra!</a></li>
              </ul>
          </div>
          <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
         </nav>
     </section>
+
+    <section id ="about" class="about">
+        <p>Sikeres jelszó módosítás után automatikusan átírányít a bejelentkezés oldalra, ahol már az új jelszóval tudsz belépni.</p>
+        <section class="allatokwrapper">
+            <div class="admin-form">
+                <h2>Jelszó módosítás</h2>
+                <form id="adminForm">
+                    <textarea id="emailujjelszo" placeholder="E-mail cím" required></textarea>
+                    <textarea id="regijelszo" placeholder="Régi jelszó" required></textarea>
+                    <textarea id="ujjelszo" placeholder="Új jelszó" required></textarea>
+                    <textarea id="ujjelszo2" placeholder="Új jelszó másodszor" required></textarea>
+                    <button type="submit" class="btn" onclick="jelszomodositas()">Módosítás</button>
+
+                </form>
+        </div>
+       </section>
+    </section>
+
    
     <footer>
         <div class="footer-content">
@@ -32,5 +50,6 @@
         </div>
     </footer>
     <script src="adminscript.js"></script>
+    <script src="jelszo.js"></script>
 </body>
 </html>
