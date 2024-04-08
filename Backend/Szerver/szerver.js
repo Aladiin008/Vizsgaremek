@@ -7,7 +7,7 @@ app.use(cors());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
 const mysql = require('mysql');
 
@@ -226,7 +226,7 @@ app.post('/allatokszerkesztese', bodyParser.json(), (req, res) => {
     });
 });
 
-app.post('/kereses', bodyParser.json(), (req, res) => {
+app.post('/kereses',bodyParser.json(), (req, res) => {
     const { kutyakereses, ivarkereses, korkereses } = req.body;
     const connection = kapcsolat();
     connection.connect();
@@ -236,10 +236,8 @@ app.post('/kereses', bodyParser.json(), (req, res) => {
         kutyakeresesBool = true;
     }
     
-   
-
     const allatok = `SELECT * FROM allatok WHERE kutya = ${kutyakereses} AND ivar = "${ivarkereses}" AND kor = ${korkereses}`;
-     console.log(allatok);
+    
     connection.query(allatok, (error, result) => {
             if (error) {
                 console.error('Hiba a keresés során:', error);
@@ -253,14 +251,13 @@ app.post('/kereses', bodyParser.json(), (req, res) => {
     
 });
 
-
 app.post('/jelszomodositas', bodyParser.json(), (req, res) => {
     const { email, regijelszo, ujjelszo } = req.body;
     const connection = kapcsolat();
 
     connection.connect();
 
-    const updateQuery = `UPDATE Felhasznalok SET Jelszo = "${ujjelszo}" WHERE Email = "${email}"`;
+    const updateQuery = `UPDATE Felhasznalok SET Jelszo = "${ujjelszo}" WHERE Email = "${email}" AND Jelszo="${regijelszo}"`;
 
     connection.query(updateQuery, (error, results) => {
         if (error) {
@@ -268,11 +265,10 @@ app.post('/jelszomodositas', bodyParser.json(), (req, res) => {
             res.status(500).json({ error: 'Hiba történt a jelszó módosítása során.' });
         } else {
             console.log('Jelszó sikeresen módosítva.');
-            res.status(200).json({ message: 'Jelszó sikeresen módosítva.' });
+            res.status(200).json(results);
         }
         connection.end();
     });
 });
-
 
 app.listen(8080);
