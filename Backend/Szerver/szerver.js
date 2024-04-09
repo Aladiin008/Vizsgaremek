@@ -187,17 +187,36 @@ app.post('/jelentkezes', bodyParser.json(), (req, res) => {
         kozepiskolasBool = true;
     }
 
-    const insertQuery = `INSERT INTO Onkentesek (onkentesnev, onkentesemail, telszam, kozepiskolas) VALUES ("${onkentesnev}", "${onkentesemail}", "${telszam}", ${kozepiskolas})`;
-
-    connection.query(insertQuery, (error, result) => {
+    const checkUserQuery = `SELECT FelhasznaloID FROM Felhasznalok WHERE Email = "${onkentesemail}"`;
+    
+    connection.query(checkUserQuery, (error, results) => {
         if (error) {
-            console.error('Hiba a jelentkezés mentése során:', error);
-            res.status(500).json({ error: 'Hiba a jelentkezés mentése során' });
-        } else {
-            console.log('Jelentkezés sikeresen mentve');
-            res.status(200).json({ message: 'Jelentkezés sikeresen mentve' });
+            console.error('Hiba az ellenőrzés során:', error);
+            res.status(500).json({ error: 'Hiba az ellenőrzés során' });
+            connection.end();
+            return;
         }
-        connection.end();
+
+        if (results.length === 0) {
+            res.status(404).json({ error: 'Nincs felhasználó ezzel az e-mail címmel' });
+            connection.end();
+            return;
+        }
+
+        const felhasznaloId = results[0].FelhasznaloID;
+
+        const insertQuery = `INSERT INTO Onkentesek (onkentesnev, onkentesemail, telszam, kozepiskolas, felhasznalo_id) VALUES ("${onkentesnev}", "${onkentesemail}", "${telszam}", ${kozepiskolas}, ${felhasznaloId})`;
+
+        connection.query(insertQuery, (error, result) => {
+            if (error) {
+                console.error('Hiba a jelentkezés mentése során:', error);
+                res.status(500).json({ error: 'Hiba a jelentkezés mentése során' });
+            } else {
+                console.log('Jelentkezés sikeresen mentve');
+                res.status(200).json({ message: 'Jelentkezés sikeresen mentve' });
+            }
+            connection.end();
+        });
     });
 });
 
@@ -270,5 +289,48 @@ app.post('/jelszomodositas', bodyParser.json(), (req, res) => {
         connection.end();
     });
 });
+
+app.post('/adatmodositas', bodyParser.json(), (req, res) => {
+    const { honapok, osszallat, kutyak } = req.body;
+    const connection = kapcsolat();
+
+    connection.connect();
+
+    if (parseInt(osszallat) < parseInt(kutyak)) {
+        return res.status(400).json({ error: "Az 'összes állat' nem lehet kisebb mint a 'kutyák'." });
+    }
+
+    const selectQuery = `SELECT * FROM elozoev WHERE honapok = '${honapok}'`;
+    connection.query(selectQuery, (error, results) => {
+        if (error) {
+            console.error('Hiba történt a lekérdezés során:', error);
+            return res.status(500).json({ error: 'Hiba történt a lekérdezés során.' });
+        }
+
+        if (results.length > 0) {
+            const updateQuery = `UPDATE elozoev SET osszallat = '${osszallat}', kutyak = '${kutyak}' WHERE honapok = '${honapok}'`;
+            connection.query(updateQuery, (error, results) => {
+                if (error) {
+                    console.error('Hiba történt a frissítés során:', error);
+                    return res.status(500).json({ error: 'Hiba történt a frissítés során.' });
+                }
+                console.log('Sikeres frissítés.');
+                return res.status(200).json({ message: 'Sikeres frissítés.' });
+            });
+        } else {
+
+            const insertQuery = `INSERT INTO elozoev (honapok, osszallat, kutyak) VALUES ('${honapok}', '${osszallat}', '${kutyak}')`;
+            connection.query(insertQuery, (error, results) => {
+                if (error) {
+                    console.error('Hiba történt a beszúrás során:', error);
+                    return res.status(500).json({ error: 'Hiba történt a beszúrás során.' });
+                }
+                console.log('Sikeres beszúrás.');
+                return res.status(200).json({ message: 'Sikeres beszúrás.' });
+            });
+        }
+    });
+});
+
 
 app.listen(8080);
