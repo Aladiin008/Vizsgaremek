@@ -47,11 +47,12 @@
                 </select>
                 <label>Kor:</label>
                 <input type="number" id="korkereses" name="kor">
-                <button type="submit" class="btn" onclick="allataink(event)">Keresés</button>
+                <button type="submit" class="btn" id="keresesGomb" onclick="allataink(event)">Keresés</button>
             </form>
         </div>
     </section>
-    <div class="allatainkcim">
+    
+    <div class="allatainkcim" id="allatainkCim" style="display: none;">
         <h1>A keresésednek megfelelő állatok:</h1>
         <p>Ha megtetszett valamelyik négylábúnk, jelentkezz be és add le örökbefogadási igényed!</p>
     </div>

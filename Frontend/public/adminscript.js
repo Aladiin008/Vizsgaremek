@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
     var pageIds = {
         "galeriaszerkesztes.html":"galeriaszerkesztes",
         "allatokszerkesztese.html":"allatokszerkesztese",
-        "admin.html":"admin"
+        "admin.html":"admin",
+        "elozoev.html":"elozoev"
 
     };
 

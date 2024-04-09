@@ -23,13 +23,23 @@
                 <li><a href="elozoev.html" id="elozoev">Féléves adatok szerkesztése</a></li>
                 <li><a href="admin.html" id="admin">Adminjogosultság kapcsoló</a></li>
                 <li><a href="login.html" id="bejelentkezes">Kijelentkezés</a></li>
-
-
              </ul>
          </div>
          <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
         </nav>
     </section>
+
+   <section class="wrapper">
+        <div class="admin-form">
+            <h2>Éves statisztika frissítés</h2>
+            <form id="adminForm">
+                <textarea id="honapok" placeholder="Hónap" required></textarea>
+                <textarea id="osszallat" placeholder="Havi összes örökbefogadott állat" required></textarea>
+                <textarea id="kutyak" placeholder="Havi összes örökbefogadott kutya" required></textarea>
+                <button type="submit" class="btn" onclick="adatmodositas(event)">Küldés</button>
+            </form>
+    </div>
+   </section>
    
     <footer>
         <div class="footer-content">
@@ -37,6 +47,8 @@
             <p>© 2024 Minden jog fenntartva.</p>
         </div>
     </footer>
+
+    <script src="elozoev.js"></script>
     <script src="adminscript.js"></script>
 </body>
 </html>

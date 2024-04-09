@@ -12,7 +12,7 @@ async function allataink(event) {
 
     
     try {
-        const response = await fetch('http://127.0.0.1:8080/allatokszerkesztese', {
+        const response = await fetch('http://127.0.0.1:8080/kereses', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,12 +27,21 @@ async function allataink(event) {
         const results = await response.json();
         const wrapper = document.querySelector('.orokbefogadhato-wrapper');
         wrapper.innerHTML = ''; 
-        results.forEach(result => {
-            const div = document.createElement('div');
-            div.textContent = `Állat neve: ${result.allatnev}, Termete: ${result.termet}, Színe: ${result.szin}, Kora: ${result.kor}, Leírás az állatról: ${result.leiras}`;
-            wrapper.appendChild(div);
-        });
+
+        if (results.length > 0) {
+            results.forEach(result => {
+                const div = document.createElement('div');
+                div.textContent = `Állat neve: ${result.allatnev}, Termete: ${result.termet}, Színe: ${result.szin}, Kora: ${result.kor}, Leírás az állatról: ${result.leiras}`;
+                wrapper.appendChild(div);
+            });
+        } else {
+            alert('Nincs olyan állatunk, ami megfelel a keresési feltételeknek.');
+        }
     } catch (error) {
         alert('Hiba történt');
     }
 }
+
+document.getElementById('keresesGomb').addEventListener('click', function() {
+    document.getElementById('allatainkCim').style.display = 'block';
+});
