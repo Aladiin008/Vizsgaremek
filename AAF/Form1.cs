@@ -22,13 +22,12 @@ namespace Vizsgaremek
         private void InitializeDatabaseConnection()
         {
             
-            
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DisplayTable("allatok");
+           
         }
 
         private void DisplayTable(string tableName)
@@ -84,6 +83,8 @@ namespace Vizsgaremek
                         textBox1.Visible = false;
                         textBox2.Visible = false;
                         button1.Visible = false;
+                        label1.Visible = false;     
+                        label2.Visible = false;
                     }
                     else
                     {
