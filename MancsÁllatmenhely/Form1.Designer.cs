@@ -37,6 +37,8 @@
             panel2 = new Panel();
             dataGridView1 = new DataGridView();
             comboBox1 = new ComboBox();
+            DeleteButton = new Button();
+            InsertButton = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -44,35 +46,39 @@
             // 
             // textBoxUsername
             // 
-            textBoxUsername.Location = new Point(407, 235);
+            textBoxUsername.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxUsername.Location = new Point(623, 213);
             textBoxUsername.Margin = new Padding(4, 5, 4, 5);
             textBoxUsername.Name = "textBoxUsername";
-            textBoxUsername.Size = new Size(213, 35);
+            textBoxUsername.Size = new Size(188, 35);
             textBoxUsername.TabIndex = 0;
             // 
             // textBoxPassword
             // 
-            textBoxPassword.Location = new Point(407, 302);
+            textBoxPassword.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxPassword.Location = new Point(623, 309);
             textBoxPassword.Margin = new Padding(4, 5, 4, 5);
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '*';
-            textBoxPassword.Size = new Size(213, 35);
+            textBoxPassword.Size = new Size(188, 35);
             textBoxPassword.TabIndex = 1;
             // 
             // ButtonLogin
             // 
-            ButtonLogin.Location = new Point(407, 378);
+            ButtonLogin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ButtonLogin.Location = new Point(560, 381);
             ButtonLogin.Margin = new Padding(4, 5, 4, 5);
             ButtonLogin.Name = "ButtonLogin";
-            ButtonLogin.Size = new Size(190, 89);
+            ButtonLogin.Size = new Size(165, 77);
             ButtonLogin.TabIndex = 2;
             ButtonLogin.Text = "Bejelentkezés";
             ButtonLogin.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(239, 240);
+            label1.Location = new Point(441, 218);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(154, 30);
@@ -81,8 +87,9 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(293, 312);
+            label2.Location = new Point(527, 309);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(68, 30);
@@ -92,25 +99,28 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(panel2);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(ButtonLogin);
             panel1.Controls.Add(textBoxPassword);
             panel1.Controls.Add(textBoxUsername);
-            panel1.Location = new Point(0, 5);
+            panel1.Location = new Point(13, 14);
             panel1.Margin = new Padding(4, 5, 4, 5);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1066, 675);
+            panel1.Size = new Size(1424, 878);
             panel1.TabIndex = 5;
             // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.Controls.Add(InsertButton);
+            panel2.Controls.Add(DeleteButton);
             panel2.Controls.Add(dataGridView1);
             panel2.Controls.Add(comboBox1);
-            panel2.Location = new Point(0, 8);
+            panel2.Location = new Point(3, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1055, 655);
+            panel2.Size = new Size(1418, 878);
             panel2.TabIndex = 5;
             // 
             // dataGridView1
@@ -123,24 +133,42 @@
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 72;
-            dataGridView1.Size = new Size(817, 636);
+            dataGridView1.Size = new Size(1180, 859);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             // 
             // comboBox1
             // 
+            comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(0, 0);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(212, 38);
+            comboBox1.Size = new Size(192, 38);
             comboBox1.TabIndex = 0;
+            // 
+            // DeleteButton
+            // 
+            DeleteButton.Location = new Point(41, 748);
+            DeleteButton.Name = "DeleteButton";
+            DeleteButton.Size = new Size(131, 40);
+            DeleteButton.TabIndex = 2;
+            DeleteButton.Text = "Törlés";
+            DeleteButton.UseVisualStyleBackColor = true;
+            // 
+            // InsertButton
+            // 
+            InsertButton.Location = new Point(41, 823);
+            InsertButton.Name = "InsertButton";
+            InsertButton.Size = new Size(131, 40);
+            InsertButton.TabIndex = 3;
+            InsertButton.Text = "Hozzáadás";
+            InsertButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1067, 675);
-            Controls.Add(panel2);
+            ClientSize = new Size(1450, 890);
             Controls.Add(panel1);
             Margin = new Padding(4, 5, 4, 5);
             Name = "Form1";
@@ -164,5 +192,7 @@
         private Panel panel2;
         private DataGridView dataGridView1;
         private ComboBox comboBox1;
+        private Button InsertButton;
+        private Button DeleteButton;
     }
 }

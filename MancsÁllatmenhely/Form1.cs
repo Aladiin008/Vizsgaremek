@@ -14,6 +14,9 @@ namespace MancsÁllatmenhely
         {
             InitializeComponent();
             ButtonLogin.Click += ButtonLogin_Click;
+            DeleteButton.Click += DeleteButton_Click;
+            InsertButton.Click += InsertButton_Click;
+
             connection = new MySqlConnection(connectionString);
         }
 
@@ -165,6 +168,84 @@ namespace MancsÁllatmenhely
                 }
             }
         }
+
+        private void DeleteRecord(string tableName, string primaryKeyValue)
+        {
+            try
+            {
+                connection.Open();
+                string query = $"DELETE FROM {tableName} WHERE {dataGridView1.Columns[0].HeaderText} = '{primaryKeyValue}'";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                MessageBox.Show($"{rowsAffected} rekord törölve.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hiba történt az adatbázis törlése során: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        private void InsertRecord(string tableName, string[] columnNames, string[] values)
+        {
+            try
+            {
+                connection.Open();
+                string columns = string.Join(", ", columnNames);
+                string valueParams = string.Join(", ", values.Select(v => $"'{v}'"));
+                string query = $"INSERT INTO {tableName} ({columns}) VALUES ({valueParams})";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                MessageBox.Show($"{rowsAffected} rekord beszúrva.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hiba történt az adatbázis beszúrása során: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                string primaryKeyValue = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                string tableName = comboBox1.SelectedItem.ToString();
+                DeleteRecord(tableName, primaryKeyValue);
+                LoadTableData(tableName); 
+            }
+        }
+        private void InsertButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                string tableName = comboBox1.SelectedItem.ToString();
+                List<string> columnNames = new List<string>();
+                List<string> values = new List<string>();
+
+                foreach (DataGridViewCell cell in dataGridView1.CurrentRow.Cells)
+                {
+                    if (cell.Selected)
+                    {
+                        columnNames.Add(dataGridView1.Columns[cell.ColumnIndex].HeaderText);
+                        values.Add(cell.Value.ToString());
+                    }
+                }
+
+                InsertRecord(tableName, columnNames.ToArray(), values.ToArray());
+                LoadTableData(tableName); 
+            }
+            else
+            {
+                MessageBox.Show("Válassz ki egy sort az adatok hozzáadásához!");
+            }
+        }
+
+
 
     }
 }
