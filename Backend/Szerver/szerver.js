@@ -11,7 +11,6 @@ app.use(cors());
 
 const mysql = require('mysql');
 
-
 const kapcsolat = ()=>{
     return mysql.createConnection({
         host: 'localhost' ,
@@ -35,12 +34,12 @@ app.get('/', (req,res)=>{
 });
 
 app.post('/login', bodyParser.json(), (req, res) => {
-    const { email, password } = req.body;
+    const { email, felhasznalonev, password } = req.body;
     const connection = kapcsolat();
 
     connection.connect();
 
-    const cmd = `SELECT * FROM Felhasznalok WHERE Email = "${email}" AND Jelszo = "${password}"`;
+    const cmd = `SELECT * FROM Felhasznalok WHERE Email = "${email}" AND FelhasznaloNev = "${felhasznalonev}" AND Jelszo = "${password}"`;
 
     connection.query(cmd, (error, results, fields) => {
         if (error) {
@@ -255,7 +254,7 @@ app.post('/kereses',bodyParser.json(), (req, res) => {
         kutyakeresesBool = true;
     }
     
-    const allatok = `SELECT * FROM allatok WHERE kutya = ${kutyakereses} AND ivar = "${ivarkereses}" AND kor = ${korkereses}`;
+    const allatok = `SELECT * FROM allatok WHERE kutya = ${kutyakereses} AND ivar = "${ivarkereses}" AND kor = ${korkereses} AND orokbefogadott = 0`;
     
     connection.query(allatok, (error, result) => {
             if (error) {
@@ -331,6 +330,77 @@ app.post('/adatmodositas', bodyParser.json(), (req, res) => {
         }
     });
 });
+
+app.get('/allatok_nevei', bodyParser.json(), (req, res) => {
+    const connection = kapcsolat();
+    connection.connect();
+
+    const query = `SELECT allatnev FROM allatok WHERE orokbefogadott = 0`;
+
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Hiba az adatok lekérdezése során:', error);
+            res.status(500).json({ error: 'Hiba az adatok lekérdezése során' });
+        } else {
+            const allatNevek = results.map(row => row.allatnev);
+            console.log('Állatok nevei sikeresen lekérdezve');
+            res.status(200).json(allatNevek);
+        }
+        connection.end();
+    });
+});
+
+app.post('/orokbefogadas', bodyParser.json(), (req, res) => {
+    const {gazdiemail, gazdinev, varos, utca, hazszam, telefonszam, allatnev } = req.body;
+    const connection = kapcsolat();
+    connection.connect();
+    
+    const checkUserQuery = `SELECT FelhasznaloID FROM Felhasznalok WHERE Email = "${gazdiemail}"`;
+    
+    connection.query(checkUserQuery, (error, results) => {
+        if (error) {
+            console.error('Hiba az ellenőrzés során:', error);
+            res.status(500).json({ error: 'Hiba az ellenőrzés során' });
+            connection.end();
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).json({ error: 'Nincs felhasználó ezzel az e-mail címmel' });
+            connection.end();
+            return;
+        }
+
+        const felhasznaloId = results[0].FelhasznaloID;
+
+        const insertQuery = `INSERT INTO gazdik (gazdinev, varos, utca, hazszam, telefonszam, felhasznalo_id) VALUES ("${gazdinev}", "${varos}", "${utca}", ${hazszam}, ${telefonszam}, ${felhasznaloId})`;
+
+        connection.query(insertQuery, (error, result) => {
+            if (error) {
+                console.error('Hiba az örökbefogadás mentése során:', error);
+                res.status(500).json({ error: 'Hiba az örökbefogadás mentése során' });
+            } else {
+                console.log('Örökbefogadás mentve');
+                
+                const newGazdiId = result.insertId;
+    
+                const insertAllatQuery =`UPDATE allatok SET gazda_id = ${newGazdiId}, orokbefogadott = true WHERE allatnev = "${allatnev}"`;
+    
+                connection.query(insertAllatQuery, (error) => {
+                    if (error) {
+                        console.error('Hiba az állat táblába való beszúrás során:', error);
+                        res.status(500).json({ error: 'Hiba az örökbefogadás mentése során' });
+                    } else {
+                        console.log('Állat gazdája frissítve');
+                        res.status(200).json({ message: 'Örökbefogadás mentve' });
+                    }
+                });
+            }
+            connection.end();
+        });
+    });
+});
+
 
 
 app.listen(8080);
