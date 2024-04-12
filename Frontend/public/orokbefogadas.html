@@ -31,7 +31,39 @@
          <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
         </nav>
     </section>
-   
+    <section id ="about" class="about">
+        <h1>Örökbefogadás</h1>
+        <p>Ezen az oldalon lehetőséged van örökbefogadási igényt benyújtani. Az állatokról az <a href="allataink.html">Örökbefogadható állataink</a> menüpont alatt találsz leírást.</p> 
+        <p>Kérlek, mielőtt kitöltenéd ezt az űrlapot, olvasd át alaposan a tudnivalókat az <a href="informaciok.html">Információk</a> oldalon, és bizonyosodj meg róla, hogy teljesítetted a feltételeket.</p>
+        <section class="allatokwrapper">
+            <div class="admin-form">
+                <label for="allatok">Válassz egy állatot:</label>
+                <select id="allatok">
+            
+                </select>
+            </div>
+        </section>
+
+        <section class="allatokwrapper">
+            <div class="admin-form">
+            <h2>Örökbefogadási adatok</h2>
+                <form id="orokbefogadasForm">
+                    <textarea id="gazdiemail" placeholder="E-mail" required></textarea>
+                    <textarea id="gazdinev" placeholder="Név" required></textarea>
+                    <textarea id="varos" placeholder="Város" required></textarea>
+                    <textarea id="utca" placeholder="Utca" required></textarea>
+                    <textarea id="hazszam" placeholder="Házszám" required></textarea>
+                    <textarea id="telefonszam" placeholder="Telefonszám" required></textarea> 
+                    <br><br>  
+                    <input type="checkbox" id="18ev" >
+                    <label for="18ev">Elmúltam 18 éves.</label><br>  
+                    <br>      
+                    <button type="submit" class="btn" onclick='orokbefogadas(event)' >Örökbefogadás leadása</button>
+                </form>
+            </div>
+        </section>
+
+    </section>
     <footer>
         <div class="footer-content">
             <p>Mancs Állatmenhely</p>
@@ -39,5 +71,7 @@
         </div>
     </footer>
     <script src="userscript.js"></script>
+    <script src="orokbefogadas-script.js"></script>
+
 </body>
 </html>

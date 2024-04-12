@@ -31,14 +31,19 @@ async function allataink(event) {
         if (results.length > 0) {
             results.forEach(result => {
                 const div = document.createElement('div');
-                div.textContent = `Állat neve: ${result.allatnev}, Termete: ${result.termet}, Színe: ${result.szin}, Kora: ${result.kor}, Leírás az állatról: ${result.leiras}`;
+                const text = document.createElement('p');
+                text.innerHTML = `Állat neve: ${result.allatnev}<br>Termete: ${result.termet}<br>Színe: ${result.szin}<br>Kora: ${result.kor}<br>Leírás az állatról: ${result.leiras}`;
+                div.appendChild(text);
                 wrapper.appendChild(div);
             });
         } else {
             alert('Nincs olyan állatunk, ami megfelel a keresési feltételeknek.');
+            window.location.reload();
+
         }
     } catch (error) {
         alert('Hiba történt');
+        window.location.reload();
     }
 }
 

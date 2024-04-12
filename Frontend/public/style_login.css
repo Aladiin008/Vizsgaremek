@@ -35,10 +35,8 @@ nav{
     position: relative;
     cursor:pointer;
     padding: 8px 12px;
-    border-radius: 15px;
-    border: 1px solid #121111;
     color: #121111;
-    text-decoration: none;
+    text-decoration: underline;
     background-color: transparent;
     outline: none; 
     margin-left: 4px;
@@ -57,24 +55,6 @@ img{
     height: auto;
 }
 
-.gomb ul li::after{
-        content: none; 
-        width:0;
-        height: 2px;
-        background: #4683b7;
-        display: block;
-        margin: auto;
-        transition: 0.5s;
-}
-
-.gomb ul li:hover::after{
-    width: 100%;
-}
-
-.gomb ul li:hover {
-    background-color: #8299cb;
-    transition: 1s;
-}
 
 nav .fa{
     display:none;

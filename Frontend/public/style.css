@@ -97,18 +97,11 @@ img {
 .pages ul li:last-child {
     cursor:pointer;
     padding: 8px 12px;
-    border-radius: 15px;
-    border: 1px solid #121111;
     color: #121111;
-    text-decoration: none;
+    text-decoration:underline;
     background-color: transparent;
     outline: none; 
     margin-left: 4px;
-}
-
-.pages ul li:last-child:hover {
-    background-color: #8299cb;
-    transition: 1s;
 }
 
 .pages ul li:last-child::after {
@@ -574,12 +567,22 @@ footer {
     margin: 20px;
 }
 
+
+
+
 .velemenyek-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 80vh;
     background-color: #fff;
+}
+
+.velemenyek-wrapper h1{
+    width: 100%;
+    margin-left: 40px;
+    text-align: left;
+    box-sizing: border-box; 
 }
 
 .admin-form {
@@ -600,6 +603,7 @@ footer {
     align-items: center;
     margin-right: 40px;
 }
+
 
 .admin-form h2{
     margin-bottom: 15px;
@@ -629,7 +633,6 @@ footer {
     box-sizing: border-box;
 }
 
-
 .velemeny-form input,
 .velemeny-form textarea {
     width: 100%;  
@@ -641,13 +644,6 @@ footer {
     font-size: 16px;
     box-sizing: border-box;
     margin-right: 20px;
-}
-
-.velemenyek-wrapper h1{
-    width: 100%;
-    margin-left: 40px;
-    text-align: left;
-    box-sizing: border-box; 
 }
 
 
@@ -764,6 +760,12 @@ footer {
     padding: 10px; 
     width: 300px; 
     margin-bottom: 10px; 
+    text-align: center; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 300px;
+    
 }
 
 .orokbefogadhato-wrapper > div:hover {
@@ -773,3 +775,4 @@ footer {
 .orokbefogadhato-wrapper > div p {
     margin-top: 10px; 
 }
+
