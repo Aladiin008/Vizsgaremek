@@ -23,7 +23,7 @@ namespace MancsÁllatmenhely
             LoadTableNames();
         }
 
-        private void ButtonLogin_Click(object sender, EventArgs e)
+        private void ButtonLogin_Click(object? sender, EventArgs e)
         {
             string username = textBoxUsername.Text;
             string password = textBoxPassword.Text;
@@ -74,6 +74,19 @@ namespace MancsÁllatmenhely
                 MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
+
+                foreach (DataColumn column in dt.Columns)
+                {
+                    if (column.DataType == typeof(bool))
+                    {
+                        DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+                        checkBoxColumn.HeaderText = column.ColumnName;
+                        checkBoxColumn.Name = column.ColumnName;
+                        checkBoxColumn.DataPropertyName = column.ColumnName;
+                        dataGridView1.Columns.Add(checkBoxColumn);
+                    }
+                }
+
                 dataGridView1.DataSource = dt;
             }
             catch (Exception ex)
@@ -85,6 +98,7 @@ namespace MancsÁllatmenhely
                 connection.Close();
             }
         }
+
 
         private void LoadTableNames()
         {
@@ -122,8 +136,16 @@ namespace MancsÁllatmenhely
                 DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];
                 string primaryKeyValue = selectedRow.Cells[0].Value.ToString();
                 string columnName = dataGridView1.Columns[e.ColumnIndex].HeaderText;
-                string cellValue = selectedRow.Cells[e.ColumnIndex].Value.ToString();
+                string cellValue = "";
 
+                if (dataGridView1.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn)
+                {
+                    cellValue = (bool)selectedRow.Cells[e.ColumnIndex].Value ? "1" : "0";
+                }
+                else
+                {
+                    cellValue = selectedRow.Cells[e.ColumnIndex].Value.ToString();
+                }
                 try
                 {
                     connection.Open();
@@ -131,7 +153,7 @@ namespace MancsÁllatmenhely
                     string query = $"UPDATE {tableName} SET {columnName} = '{cellValue}' WHERE {dataGridView1.Columns[0].HeaderText} = '{primaryKeyValue}'";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
                     int rowsAffected = cmd.ExecuteNonQuery();
-                    MessageBox.Show($"{rowsAffected}  módosítás sikeresen megtörtént.");
+                    MessageBox.Show($"{rowsAffected} rekord módosítva.");
                 }
                 catch (Exception ex)
                 {
@@ -143,5 +165,6 @@ namespace MancsÁllatmenhely
                 }
             }
         }
+
     }
 }
