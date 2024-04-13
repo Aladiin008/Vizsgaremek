@@ -31,6 +31,13 @@
         </nav>
     </section>
    
+    <section class="allatokwrapper" >
+        <h1>Képfeltöltés</h1>
+        <form id="imageUploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file"  id="fileInput" name="image" accept="image/*">
+            <button type="submit" class="btn" onclick='upload(event)' >Feltöltés</button>
+        </form>
+    </section>
     <footer>
         <div class="footer-content">
             <p>Mancs Állatmenhely</p>
@@ -38,5 +45,7 @@
         </div>
     </footer>
     <script src="adminscript.js"></script>
+    <script src="galeriaszerkesztes-script.js"></script>
+
 </body>
 </html>
