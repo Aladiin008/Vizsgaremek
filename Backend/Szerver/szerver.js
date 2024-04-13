@@ -1,5 +1,8 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 const app = express();
 
 const cors = require('cors');
@@ -401,6 +404,46 @@ app.post('/orokbefogadas', bodyParser.json(), (req, res) => {
     });
 });
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images'); 
+    },
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        const egyediazon = new Date().getTime(); 
+        cb(null, `${egyediazon}${ext}`);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+
+app.post('/upload', upload.single('image'), (req, res) => {
+    const { filename, path: filePath } = req.file;
+    const connection = kapcsolat();
+    const insertQuery = `INSERT INTO Images (filename, filepath) VALUES (?, ?)`;
+    connection.query(insertQuery, [filename, filePath], (error, results, fields) => {
+        if (error) {
+            console.error('Hiba az adatbázisba történő mentés során:', error);
+            res.status(500).json({ error: 'Hiba az adatbázisba történő mentés során' });
+            return;
+        }
+        res.status(200).json({ message: 'Fájl sikeresen feltöltve és mentve az adatbázisba' });
+        connection.end(); 
+    });
+});
+
+app.get('/getImages', (req, res) => {
+    const selectQuery = 'SELECT * FROM Images';
+    connection.query(selectQuery, (error, results, fields) => {
+        if (error) {
+            console.error('Hiba az adatok lekérésekor:', error);
+            res.status(500).json({ error: 'Hiba az adatok lekérésekor' });
+            return;
+        }
+        res.status(200).json(results);
+    });
+});
 
 
 app.listen(8080);
