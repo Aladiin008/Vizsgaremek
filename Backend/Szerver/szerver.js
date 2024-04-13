@@ -410,8 +410,9 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const ext = path.extname(file.originalname);
-        const egyediazon = new Date().getTime(); 
-        cb(null, `${egyediazon}${ext}`);
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}${now.getMonth() + 1}${now.getDate()}${now.getHours()}${now.getMinutes()}${now.getSeconds()}${now.getMilliseconds()}`;
+        cb(null, `${formattedDate}${ext}`);
     }
 });
 
@@ -421,7 +422,7 @@ const upload = multer({ storage: storage });
 app.post('/upload', upload.single('image'), (req, res) => {
     const { filename, path: filePath } = req.file;
     const connection = kapcsolat();
-    const insertQuery = `INSERT INTO Images (filename, filepath) VALUES (?, ?)`;
+    const insertQuery = `INSERT INTO kepek (filename, filepath) VALUES (?, ?)`;
     connection.query(insertQuery, [filename, filePath], (error, results, fields) => {
         if (error) {
             console.error('Hiba az adatbázisba történő mentés során:', error);
@@ -434,7 +435,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
 });
 
 app.get('/getImages', (req, res) => {
-    const selectQuery = 'SELECT * FROM Images';
+    const selectQuery = 'SELECT * FROM kepek';
     connection.query(selectQuery, (error, results, fields) => {
         if (error) {
             console.error('Hiba az adatok lekérésekor:', error);
