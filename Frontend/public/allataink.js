@@ -1,3 +1,11 @@
+var kereses = document.getElementById('kereses');
+var allatainkWrapper = document.querySelector('.allatainkwrapper');
+
+kereses.addEventListener("click", function() {
+    allatainkWrapper.style.display = "flex";
+});
+
+
 async function allataink(event) {
     event.preventDefault();
 

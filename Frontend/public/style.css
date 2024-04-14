@@ -307,6 +307,12 @@ p{
     transition: 0.5s;
 }
 
+.fa{
+    margin-top:20px;
+    margin-left: 50%;
+    cursor: pointer;
+}
+
 
 h3{
 text-align: center;
@@ -371,6 +377,11 @@ margin: 10px 0;
         position: relative; 
     }
 
+}
+@media(min-width:1400px){
+    .recharts-legend-wrapper {
+        display: block;
+    }
 }
 
 .alapelvek-col{
@@ -618,6 +629,14 @@ footer {
     justify-content: center;
     margin: 20px;
     height:800px;
+}
+
+.allatainkwrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    display: none;
 }
 
 
