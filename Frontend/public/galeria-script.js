@@ -12,7 +12,7 @@ function closeWholeImg() {
 
 function Kepmegjelenites() {
     const div = document.getElementById("gallery");    
-    fetch('/getImages', {
+    fetch('http://127.0.0.1:8080/getImages', {
         method: 'GET'
 
     })
@@ -26,7 +26,7 @@ function Kepmegjelenites() {
     .then(data => {
         data.forEach(item => {
             const img = document.createElement("img");
-            img.src = item.filepath; 
+            img.src = "images/" + item.filepath;
             img.className = "gallery-img";
             img.addEventListener("click", function() {
                 openWholeImg(this.src);

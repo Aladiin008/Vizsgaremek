@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     var navLinks = document.getElementById("links");
+    var menuButton = document.querySelector(".fa-bars");
+    var closeButton = document.querySelector(".fa-times");
 
-    window.menuMegjelenites = function() {
-        navLinks.style.right = "-50%";
-        
-    };
+    menuButton.addEventListener("click", function() {
+        navLinks.classList.add("active");
+        ujMenu(true);
+    });
 
-    window.menuBezaras = function() {
-        navLinks.style.right = "-100%";
-
-    };
+    closeButton.addEventListener("click", function() {
+        navLinks.classList.remove("active");
+        ujMenu(false);
+    });
 
 
     var currentPath = window.location.pathname.split("/").pop(); 

@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     var navLinks = document.getElementById("links");
+    var menuButton = document.querySelector(".fa-bars");
+    var closeButton = document.querySelector(".fa-times");
 
-    window.menuMegjelenites = function() {
-        navLinks.style.right = "-50%";
+    menuButton.addEventListener("click", function() {
+        navLinks.classList.add("active");
         ujMenu(true);
-    };
+    });
 
-    window.menuBezaras = function() {
-        navLinks.style.right = "-100%";
+    closeButton.addEventListener("click", function() {
+        navLinks.classList.remove("active");
         ujMenu(false);
-    };
+    });
 
     function ujMenu(megjelenitve) {
         var adminLink = document.querySelector("#links ul li:nth-child(2) a");
@@ -41,3 +43,27 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
 });
+/*
+document.getElementById('bejelentkezes').addEventListener('click', async (event) => {
+    event.preventDefault(); 
+
+    try {
+        const response = await fetch('http://127.0.0.1:8080/logout', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        if (response.ok) {
+            window.location.href = 'login.html';
+        } else {
+            const data = await response.json();
+            alert(data.error || 'Hiba történt a kijelentkezés során.');
+        }
+    } catch (error) {
+        console.error('Hiba történt a kérés során:', error);
+        alert('Hiba történt a kijelentkezés során.');
+    }
+});*/

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Főoldal</title>
+    <title>Örökbefogadás</title>
     <link rel = "stylesheet" href = "style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
         <nav>
          <a href="index.html"><img src="logo.png" id="logo"></a>
          <div class = "pages" id="links">
-             <i class="fa fa-times" onclick="menuBezaras()"></i>
+            <i class="fa fa-times" id=".fa-times"></i>
              <ul>
                 <li><a href="orokbefogadas.html" id="orokbefogadas">Örökbefogadás</a></li>
                 <li><a href="segitenek.html" id="segitenek">Segítenék</a></li>
@@ -28,7 +28,7 @@
                 </div>
              </ul>
          </div>
-         <i class="fa fa-bars" onclick="menuMegjelenites()"></i>
+         <i class="fa fa-bars" id=".fa-bars"></i>
         </nav>
     </section>
     <section id ="about" class="about">
@@ -55,8 +55,8 @@
                     <textarea id="hazszam" placeholder="Házszám" required></textarea>
                     <textarea id="telefonszam" placeholder="Telefonszám" required></textarea> 
                     <br><br>  
-                    <input type="checkbox" id="18ev" >
-                    <label for="18ev">Elmúltam 18 éves.</label><br>  
+                    <input type="checkbox" id="feltetelek" >
+                    <label for="feltetelek">Elfogadom az örökbefogadás feltételeit.</label><br>  
                     <br>      
                     <button type="submit" class="btn" onclick='orokbefogadas(event)' >Örökbefogadás leadása</button>
                 </form>

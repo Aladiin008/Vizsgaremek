@@ -1,4 +1,4 @@
-async function upload(event) {
+async function feltoltes(event) {
     event.preventDefault();
 
     const fileInput = document.getElementById('fileInput');
@@ -6,7 +6,7 @@ async function upload(event) {
 
     if (file) {
         try {
-            await uploadFile(file);
+            await fileFeltoltes(file);
         } catch (error) {
             console.error('Hiba történt a fájl feltöltése során:', error);
         }
@@ -15,12 +15,12 @@ async function upload(event) {
     }
 }
 
-async function uploadFile(file) {
+async function fileFeltoltes(file) {
     const formData = new FormData();
     formData.append('image', file);
 
     try {
-        const response = await fetch('http://127.0.0.1:8080/upload', {
+        const response = await fetch('http://127.0.0.1:8080/feltoltes', {
             method: 'POST',
             body: formData
         });
@@ -28,7 +28,6 @@ async function uploadFile(file) {
         if (!response.ok) {
             throw new Error('Hiba történt a fájl feltöltése során.');
         }
-
         const data = await response.json();
         alert('Fájl sikeresen feltöltve', data);
         window.location.reload();

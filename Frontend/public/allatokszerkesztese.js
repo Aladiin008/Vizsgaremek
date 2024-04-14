@@ -30,7 +30,7 @@ async function allatokszerkesztese(event) {
     if (response.ok) {
         console.log('Sikeres beküldés');
         alert("Sikeres beküldés.");
-        window.location.href="allatokszerkesztese.html";
+        window.location.href="kepfeltoltes.html";
     } else {
         alert("A beküldés sikertelen.");
         window.location.href="allatokszerkesztese.html";
