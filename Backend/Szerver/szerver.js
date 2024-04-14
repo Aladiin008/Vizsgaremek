@@ -445,10 +445,26 @@ app.post('/feltoltes', feltoltes.single('image'), (req, res) => {
         if (error) {
             console.error('Hiba az adatbázisba történő mentés során:', error);
             res.status(500).json({ error: 'Hiba az adatbázisba történő mentés során' });
+            connection.end();
             return;
         }
-        res.status(200).json({ message: 'Fájl sikeresen feltöltve és mentve az adatbázisba' });
-        connection.end(); 
+        
+        console.log('Kép mentve');
+                
+        const kepId = results.insertId;
+        const insertAllatQuery = `UPDATE allatok SET kep_id = ? WHERE id = (SELECT MAX(id) FROM allatok)`;
+        connection.query(insertAllatQuery, [kepId], (error) => {
+            if (error) {
+                console.error('Hiba az Id beszúrás során:', error);
+                res.status(500).json({ error: 'Hiba az Id mentése során' });
+                connection.end();
+                return;
+            }
+
+            console.log('Id frissítve');
+            res.status(200).json({ message: 'Id frissítve' });
+            connection.end(); 
+        });
     });
 });
 
