@@ -14,6 +14,13 @@ fetch('http://127.0.0.1:8080/allatok_nevei')
 
 async function orokbefogadas(event) {
     event.preventDefault();
+
+    const feltetelekCheckbox = document.getElementById('feltetelek');
+    if (!feltetelekCheckbox.checked) {
+        alert("Az örökbefogadási feltételeket el kell fogadnia!");
+        return;
+    }
+
     const gazdiemail = document.getElementById('gazdiemail').value;
     const gazdinev = document.getElementById('gazdinev').value;
     const varos = document.getElementById('varos').value;
@@ -40,7 +47,7 @@ async function orokbefogadas(event) {
         
         if (response.ok) {
             console.log('Sikeres beküldés');
-            alert("Sikeres beküldés.");
+            alert("Sikeres örökbefogadás.");
             window.location.reload();
         } else {
             alert("A beküldés sikertelen.");

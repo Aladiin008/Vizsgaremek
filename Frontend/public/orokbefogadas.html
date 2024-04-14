@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Örökbefogadás</title>
-    <link rel = "stylesheet" href = "/css/style.css">
+    <link rel = "stylesheet" href = "style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body>
     <section class="navbar">
         <nav>
-         <a href="index.html"><img src="/images/logo.png" id="logo"></a>
+         <a href="index.html"><img src="logo.png" id="logo"></a>
          <div class = "pages" id="links">
             <i class="fa fa-times" id=".fa-times"></i>
              <ul>
@@ -35,7 +35,7 @@
         <h1>Örökbefogadás</h1>
         <p>Ezen az oldalon lehetőséged van örökbefogadási igényt benyújtani. Az állatokról az <a href="allataink.html">Örökbefogadható állataink</a> menüpont alatt találsz leírást.</p> 
         <p>Kérlek, mielőtt kitöltenéd ezt az űrlapot, olvasd át alaposan a tudnivalókat az <a href="informaciok.html">Információk</a> oldalon, és bizonyosodj meg róla, hogy teljesítetted a feltételeket.</p>
-        <section class="allatokwrapper">
+        <section class="felhasznalok-wrapper">
             <div class="admin-form">
                 <label for="allatok">Válassz egy állatot:</label>
                 <select id="allatok">
@@ -54,9 +54,10 @@
                     <textarea id="utca" placeholder="Utca" required></textarea>
                     <textarea id="hazszam" placeholder="Házszám" required></textarea>
                     <textarea id="telefonszam" placeholder="Telefonszám" required></textarea> 
-                    <br><br>  
+                    <br><br> 
+                    <label for="feltetelek">Elfogadom az örökbefogadás feltételeit.</label> 
                     <input type="checkbox" id="feltetelek" >
-                    <label for="feltetelek">Elfogadom az örökbefogadás feltételeit.</label><br>  
+                    <br>  
                     <br>      
                     <button type="submit" class="btn" onclick='orokbefogadas(event)' >Örökbefogadás leadása</button>
                 </form>
@@ -70,8 +71,8 @@
             <p>© 2024 Minden jog fenntartva.</p>
         </div>
     </footer>
-    <script src="/javascript/userscript.js"></script>
-    <script src="/javascript/orokbefogadas-script.js"></script>
+    <script src="userscript.js"></script>
+    <script src="orokbefogadas-script.js"></script>
 
 </body>
 </html>
