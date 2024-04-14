@@ -32,6 +32,13 @@ CREATE TABLE gazdik (
     FOREIGN KEY (felhasznalo_id) REFERENCES Felhasznalok(FelhasznaloID)
 );
 
+CREATE TABLE kepek (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    filename VARCHAR(255) NOT NULL,
+    filepath VARCHAR(255) NOT NULL
+);
+
+
 CREATE TABLE allatok (
     id INT PRIMARY KEY AUTO_INCREMENT,
     kutya BOOLEAN DEFAULT FALSE,
@@ -42,16 +49,13 @@ CREATE TABLE allatok (
     kor INT,
     leiras VARCHAR(255),
     orokbefogadott BOOLEAN DEFAULT FALSE,
+    kep_id INT,
     gazda_id INT,
-    FOREIGN KEY (gazda_id) REFERENCES gazdik(id)
+    FOREIGN KEY (gazda_id) REFERENCES gazdik(id),
+    FOREIGN KEY (kep_id) REFERENCES kepek(id)
 
 );
 
-CREATE TABLE kepek (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    filename VARCHAR(255) NOT NULL,
-    filepath VARCHAR(255) NOT NULL
-);
 
 
 CREATE TABLE elozoev(
@@ -77,29 +81,15 @@ VALUES ('admin', 'admin@teszt.hu', 'admin123', TRUE),
 INSERT INTO allatok (kutya, ivar, allatnev, termet, szin, kor, leiras) VALUES
 (TRUE, 'szuka', 'Bodri', 'kicsi', 'barna', 3, 'Még visszahúzódó, félénk egy kicsit, de egy nyugodt otthonban, egy türelmes gazdi mellett hamar meg tudna nyílni.'),
 (FALSE, 'szuka', 'Gombóc', 'kicsi', 'cirmos', 1, 'Barátkozós, kedves bársonytalpú. Szinte azonnal barátságot köt mindenkivel, akivel találkozik. Kezdő cicásoknak is ajánljuk.'),
-(FALSE, 'szuka', 'Zsuzsi', 'közepes', 'fekete-fehér', 5, 'Kedves és érzékeny macska, aki szereti a csendes és nyugodt környezetet.'),
 (TRUE, 'kan', 'Coco', 'közepes', 'fehér', 5, 'Barátságos és aktív kutya, szeret sétálni, játszani.'),
 (FALSE, 'szuka', 'Dundi', 'közepes', 'fekete', 2, 'Bekuckózós bajnokunk, rendszerint a takaró alá bújik és a napja nagy részét ott tölti.'),
-(TRUE, 'kan', 'Morzsi', 'kicsi', 'szürke', 4, 'Kis termetű és igazán tekintélyt parancsoló kiállású kutya. Nem rögtön, de pár alkalom után már magától bújik egy kis simogatásért.'),
-(TRUE, 'kan', 'Max', 'közepes', 'fekete', 4, 'Barátságos és játékos kutya, szeret sétálni és játszani a labdával.'),
-(FALSE, 'szuka', 'Luna', 'kicsi', 'fehér', 2, 'Életvidám és kedves kis macska, szeret játszani és szeretetteljes.'),
-(TRUE, 'kan', 'Rocky', 'nagy', 'barna', 5, 'Imád sétálni és futkározni a kertben, nagyon ragaszkodó és odaadó.'),
-(TRUE, 'kan', 'Buddy', 'közepes', 'szürke', 3, 'Barátságos és energikus kutya, aki szeret játszani és futkározni.'),
-(TRUE, 'kan', 'Rex', 'közepes', 'fekete', 3, 'Játékos és vidám kutya, aki szeret más kutyákkal ismerkedni a parkban.'),
-(FALSE, 'szuka', 'Molly', 'nagy', 'tarka', 6, 'Nyugodt és hűséges kutya, szeret pihenni és sétálni a természetben.'),
-(FALSE, 'szuka', 'Sári', 'kicsi', 'fekete-fehér', 1, 'Életvidám és mozgékony kiscica, aki imád játszani a labdával.'),
-(TRUE, 'kan', 'Brutus', 'nagy', 'barna', 5, 'Őrző-védő kutya, aki nagyon odaadó és hűséges a családjához.'),
-(FALSE, 'szuka', 'Dolly', 'közepes', 'szürke', 2, 'Nyugodt és kiegyensúlyozott kis macska, aki szeret simogatásokat kapni.'),
-(TRUE, 'kan', 'Bruno', 'nagy', 'fekete', 4, 'Energikus és játszós kutya, aki szeret futkározni a kertben és a parkban.');
+(TRUE, 'kan', 'Morzsi', 'kicsi', 'szürke', 4, 'Kis termetű és igazán tekintélyt parancsoló kiállású kutya. Nem rögtön, de pár alkalom után már magától bújik egy kis simogatásért.');
 
 
 INSERT INTO gazdik (gazdinev, varos, utca, hazszam, telefonszam) VALUES
 ('Kiss Péter', 'Kecskemét', 'Sárga Krumpli', 22, '123456789'),
 ('Nagy Dominika', 'Budapest', 'Kék út', 5, '987654321'),
-('Kovács János', 'Debrecen', 'Zöld tér', 10, '1122334455'),
-('Nagy Márta', 'Budapest', 'Kék utca', 10, '987654321'),
-('Kovács István', 'Debrecen', 'Zöld út', 15, '234567890'),
-('Tóth Gábor', 'Szeged', 'Piros tér', 5, '345678901');
+('Kovács János', 'Debrecen', 'Zöld tér', 10, '1122334455');
 
 
 INSERT INTO elozoev(honapok, osszallat, kutyak) VALUES
