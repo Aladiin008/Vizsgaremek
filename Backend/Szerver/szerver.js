@@ -417,11 +417,13 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+const feltoltes = multer({ storage: storage });
 
 
 app.post('/upload', upload.single('image'), (req, res) => {
     const { filename, path: filePath } = req.file;
     const connection = kapcsolat();
+    connection.connect();
     const insertQuery = `INSERT INTO kepek (filename, filepath) VALUES (?, ?)`;
     connection.query(insertQuery, [filename, filePath], (error, results, fields) => {
         if (error) {
@@ -434,7 +436,25 @@ app.post('/upload', upload.single('image'), (req, res) => {
     });
 });
 
-app.get('/getImages', (req, res) => {
+app.post('/feltoltes', feltoltes.single('image'), (req, res) => {
+    const { filename, path: filePath } = req.file;
+    const connection = kapcsolat();
+    connection.connect();
+    const insertQuery = `INSERT INTO kepek (filename, filepath) VALUES (?, ?)`;
+    connection.query(insertQuery, [filename, filePath], (error, results, fields) => {
+        if (error) {
+            console.error('Hiba az adatbázisba történő mentés során:', error);
+            res.status(500).json({ error: 'Hiba az adatbázisba történő mentés során' });
+            return;
+        }
+        res.status(200).json({ message: 'Fájl sikeresen feltöltve és mentve az adatbázisba' });
+        connection.end(); 
+    });
+});
+
+app.get('/getImages',bodyParser.json(), (req, res) => {
+    const connection = kapcsolat(); 
+    connection.connect();
     const selectQuery = 'SELECT * FROM kepek';
     connection.query(selectQuery, (error, results, fields) => {
         if (error) {
@@ -443,8 +463,10 @@ app.get('/getImages', (req, res) => {
             return;
         }
         res.status(200).json(results);
+        connection.end(); 
     });
 });
+
 
 
 app.listen(8080);
