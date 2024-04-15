@@ -70,7 +70,19 @@ CREATE TABLE Velemenyek (
     Velemeny VARCHAR(255) NOT NULL
 );
 
-
+INSERT INTO kepek (filename,filepath)VALUES
+('202441591422453.jpg','public\images\202441591422453.jpg'),
+('202441591429318.png','public\images\202441591429318.png'),
+('202441591434367.jpg','public\images\202441591434367.jpg'),
+('202441591440166.jpg','public\images\202441591440166.jpg'),
+('202441591444815.jpg','public\images\202441591444815.jpg'),
+('202441591450299.jpg','public\images\202441591450299.jpg'),
+('20244159150481.jpg','public\images\20244159150481.jpg'),
+('20244159154443.jpg','public\images\20244159154443.jpg'),
+('tacsi.jpg','public\images\tacsi.jpg'),
+('20244159159727.jpg','public\images\20244159159727.jpg'),
+('kóbor-cica-pixabay.jpg','public\images\kóbor-cica-pixabay.jpg'),
+('233.jpg','public\images\233.jpg');
 
 
 INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)
