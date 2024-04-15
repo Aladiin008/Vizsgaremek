@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hu" class="egyeb-oldal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelszó módosítás</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+    <section class="navbar">
+        <nav>
+            <a href="index.html"><img src="logo.png"></a>
+            <div class = "gomb" id="links">
+                <ul>
+                    <li><a href="orokbefogadas.html">Vissza</a></li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <section id ="about" class="about">
+        <section class="allatokwrapper">
+            <div class="admin-form">
+                <h2>Jelszó módosítás</h2>
+                <p>Sikeres jelszó módosítás után automatikusan átírányít a bejelentkezés oldalra, ahol már az új jelszóval tudsz belépni.</p>
+
+                <form id="adminForm">
+                    <textarea id="emailujjelszo" placeholder="E-mail cím" required></textarea>
+                    <textarea id="regijelszo" placeholder="Régi jelszó" required></textarea>
+                    <textarea id="ujjelszo" placeholder="Új jelszó" required></textarea>
+                    <textarea id="ujjelszo2" placeholder="Új jelszó másodszor" required></textarea>
+                    <button type="submit" class="btn" onclick="jelszomodositas(event)">Módosítás</button>
+
+                </form>
+        </div>
+       </section>
+    </section>
+
+   
+    <footer>
+        <div class="footer-content">
+            <p>Mancs Állatmenhely</p>
+            <p>© 2024 Minden jog fenntartva.</p>
+        </div>
+    </footer>
+    <script src="jelszo.js"></script>
+</body>
+</html>
