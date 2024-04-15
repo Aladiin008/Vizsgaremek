@@ -70,19 +70,24 @@ CREATE TABLE Velemenyek (
     Velemeny VARCHAR(255) NOT NULL
 );
 
+INSERT INTO Velemenyek (Nev,Velemeny)VALUES
+('Ádám','Nagyon aranyos kis kutyás sikerült választanunk. És nagyon barátságosak voltak a dolgozók.'),
+('Maja','Egy kis kutyát és egy kis cicát is sikerült választaununk, nagyon segítőkészek voltak a dolgozók.');
+
+
 INSERT INTO kepek (filename,filepath)VALUES
-('202441591422453.jpg','public\images\202441591422453.jpg'),
-('202441591429318.png','public\images\202441591429318.png'),
-('202441591434367.jpg','public\images\202441591434367.jpg'),
-('202441591440166.jpg','public\images\202441591440166.jpg'),
-('202441591444815.jpg','public\images\202441591444815.jpg'),
-('202441591450299.jpg','public\images\202441591450299.jpg'),
-('20244159150481.jpg','public\images\20244159150481.jpg'),
-('20244159154443.jpg','public\images\20244159154443.jpg'),
-('tacsi.jpg','public\images\tacsi.jpg'),
-('20244159159727.jpg','public\images\20244159159727.jpg'),
-('kóbor-cica-pixabay.jpg','public\images\kóbor-cica-pixabay.jpg'),
-('233.jpg','public\images\233.jpg');
+('1.jpg','public\images\1.jpg'),
+('2.jpg','public\images\2.png'),
+('3.jpg','public\images\3.jpg'),
+('4.jpg','public\images\4.jpg'),
+('5.jpg','public\images\5.jpg'),
+('6.jpg','public\images\6.jpg'),
+('7.jpg','public\images\7.jpg'),
+('8.jpg','public\images\8.jpg'),
+('9.jpg','public\images\9.jpg'),
+('10.jpg','public\images\10.jpg'),
+('11.jpg','public\images\11.jpg'),
+('12.jpg','public\images\12.jpg');
 
 
 INSERT INTO Felhasznalok (FelhasznaloNev, Email, Jelszo, adminjogosultsag)
@@ -90,12 +95,19 @@ VALUES ('admin', 'admin@teszt.hu', 'admin123', TRUE),
 ('felhasznalo', 'felhasznalo@teszt.hu', 'felhasznalo123', FALSE);
 
 
-INSERT INTO allatok (kutya, ivar, allatnev, termet, szin, kor, leiras) VALUES
-(TRUE, 'szuka', 'Bodri', 'kicsi', 'barna', 3, 'Még visszahúzódó, félénk egy kicsit, de egy nyugodt otthonban, egy türelmes gazdi mellett hamar meg tudna nyílni.'),
-(FALSE, 'szuka', 'Gombóc', 'kicsi', 'cirmos', 1, 'Barátkozós, kedves bársonytalpú. Szinte azonnal barátságot köt mindenkivel, akivel találkozik. Kezdő cicásoknak is ajánljuk.'),
-(TRUE, 'kan', 'Coco', 'közepes', 'fehér', 5, 'Barátságos és aktív kutya, szeret sétálni, játszani.'),
-(FALSE, 'szuka', 'Dundi', 'közepes', 'fekete', 2, 'Bekuckózós bajnokunk, rendszerint a takaró alá bújik és a napja nagy részét ott tölti.'),
-(TRUE, 'kan', 'Morzsi', 'kicsi', 'szürke', 4, 'Kis termetű és igazán tekintélyt parancsoló kiállású kutya. Nem rögtön, de pár alkalom után már magától bújik egy kis simogatásért.');
+INSERT INTO allatok (kutya, ivar, allatnev, termet, szin, kor, leiras,kep_id) VALUES
+(TRUE, 'szuka', 'Bodri', 'kicsi', 'barna', 3, 'Még visszahúzódó, félénk egy kicsit, de egy nyugodt otthonban, egy türelmes gazdi mellett hamar meg tudna nyílni.',1),
+(FALSE, 'szuka', 'Gombóc', 'kicsi', 'cirmos', 1, 'Barátkozós, kedves bársonytalpú. Szinte azonnal barátságot köt mindenkivel, akivel találkozik. Kezdő cicásoknak is ajánljuk.',2),
+(TRUE, 'kan', 'Coco', 'közepes', 'fehér', 5, 'Barátságos és aktív kutya, szeret sétálni, játszani.',3),
+(FALSE, 'szuka', 'Dundi', 'közepes', 'fekete', 2, 'Bekuckózós bajnokunk, rendszerint a takaró alá bújik és a napja nagy részét ott tölti.',4),
+(FALSE, 'szuka', 'Cirmi', 'közepes', 'fehér-fekete', 6, 'Játékos és energikus kutya, imád kint lenni a szabadban és labdázni.',5),
+(TRUE, 'kan', 'Rex', 'kicsi', 'szürke-fehér', 2, 'Csendes, visszahúzódó jellem, de egy idő után megszereti az embereket.',6),
+(FALSE, 'kan', 'Sanyi', 'nagy', 'fekete-fehér', 7, 'Barátságos és játékos, szeret futkározni és más kutyákkal játszani.',7),
+(TRUE, 'kan', 'Szundi', 'közepes', 'barna-fekete', 4, 'Kedves és hűséges kutya, szeret a gazdájával lenni és sétálni menni.',8),
+(FALSE, 'szuka', 'Saci', 'kicsi', 'barna', 2, 'Csendes és nyugodt cica, aki szeret a gazdájával összebújni és aludni.',9),
+(TRUE, 'kan', 'Max', 'közepes', 'barna-fekete', 3, 'Aktív és vidám kutya, mindig kész egy kis kirándulásra vagy játékra.',10),
+(FALSE, 'szuka', 'Saci', 'kicsi', 'foltos', 2, 'Csendes és nyugodt cica, aki szeret a gazdájával összebújni és aludni.',11),
+(TRUE, 'kan', 'Morzsi', 'kicsi', 'szürke', 4, 'Kis termetű és igazán tekintélyt parancsoló kiállású kutya. Nem rögtön, de pár alkalom után már magától bújik egy kis simogatásért.',12);
 
 
 INSERT INTO gazdik (gazdinev, varos, utca, hazszam, telefonszam) VALUES
