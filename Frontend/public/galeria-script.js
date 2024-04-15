@@ -10,33 +10,25 @@ function closeWholeImg() {
     wholeImgBox.style.display = "none";
 }
 
-function Kepmegjelenites() {
-    const div = document.getElementById("gallery");    
-    fetch('http://127.0.0.1:8080/getImages', {
-        method: 'GET'
-
-    })
-
-    .then(response => {
+async function fetchImages() {
+    try {
+        const response = await fetch('http://localhost:8080/kepek');
         if (!response.ok) {
-            throw new Error('Hiba történt a kérés során: ' + response.statusText);
+            throw new Error('Nem sikerült lekérni a képeket.');
         }
-        return response.json(); 
-    })
-    .then(data => {
-        data.forEach(item => {
-            const img = document.createElement("img");
-            img.src = "images/" + item.filepath;
-            img.className = "gallery-img";
-            img.addEventListener("click", function() {
-                openWholeImg(this.src);
-            });
-            div.appendChild(img);
+        const images = await response.json();
+        const gallery = document.getElementById('gallery');
+        images.forEach(image => {
+            const img = document.createElement('img');
+            img.src = `http://localhost:8080/images/${image.filename}`;
+            img.alt = image.filename;
+            img.classList.add('thumbnail');
+            img.addEventListener('click', () => openWholeImg(`http://localhost:8080/images/${image.filename}`));
+            gallery.appendChild(img);
         });
-    })
-    .catch(error => {
-        console.error('Hiba történt:', error);
-    });
+    } catch (error) {
+        console.error('Hiba történt a képek lekérése során:', error);
+    }
 }
 
-Kepmegjelenites();
+window.onload = fetchImages; 

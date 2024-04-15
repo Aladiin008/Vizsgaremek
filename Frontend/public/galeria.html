@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="hu" class="egyeb-oldal">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galéria</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
 <body>
     <section class="navbar">
         <nav>
-            <a href="index.html"><img src="logo.png" id="logo"></a>
+            <a href="index.html"><img src="/images/logo.png" id="logo"></a>
             <div class="pages" id="links">
                 <i class="fa fa-times" id=".fa-times"></i>
                 <ul>
@@ -20,30 +21,31 @@
                     <li><a href="allataink.html" id="allataink">Örökbefogadható állataink</a></li>
                     <li><a href="informaciok.html" id="informaciok">Információk</a></li>
                     <li><a href="galeria.html" id="galeria">Galéria</a></li>
-                    <li><a href="kapcsolat.html" id="kapcsolat">Kapcsolat</a></li>
+                    <li><a href="kapcsolat.html" id="kapcsolat">Kapcsolat és vélemények</a></li>
                     <li><a href="login.html" id="bejelentkezes">Bejelentkezés</a></li>
                 </ul>
             </div>
             <i class="fa fa-bars" id=".fa-bars"></i>
         </nav>
     </section>
-    <section class="allatokwrapper">
+
     <div id="gallery" class="gallery">
    
         
     </div>
-    </section>
     <div class="wholeimg" id="wholeImgBox">
         <img src="images/img1.jpg" id="wholeImg">
         <span onclick="closeWholeImg()">X</span>
     </div>
 
-    <script src="script.js"></script>
-    <script src="galeria-script.js"></script>
-    <footer>
-        <div class="footer-content">
-            <p>Mancs Állatmenhely</p>
-            <p>© 2024 Minden jog fenntartva.</p>
-        </div>
-    </footer>
-</body>
+    
+        <footer>
+            <div class="footer-content">
+                <p>Mancs Állatmenhely</p>
+                <p>© 2024 Minden jog fenntartva.</p>
+            </div>
+        </footer>
+    <script src="/javascript/script.js"></script>
+    <script src="/javascript/galeria-script.js"></script>
+    </body>
+</html>
