@@ -8,9 +8,6 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-//app.use(bodyParser.json());
 
 const mysql = require('mysql');
 
@@ -468,18 +465,29 @@ app.post('/feltoltes', feltoltes.single('image'), (req, res) => {
     });
 });
 
-app.get('/getImages',bodyParser.json(), (req, res) => {
-    const connection = kapcsolat(); 
+app.use("/images", express.static('public/images'));
+
+app.get('/kepek', (req, res) => {
+    const connection = kapcsolat();
     connection.connect();
-    const selectQuery = 'SELECT * FROM kepek';
-    connection.query(selectQuery, (error, results, fields) => {
+
+    const query = `SELECT * FROM kepek`;
+
+    connection.query(query, (error, results) => {
         if (error) {
-            console.error('Hiba az adatok lekérésekor:', error);
-            res.status(500).json({ error: 'Hiba az adatok lekérésekor' });
-            return;
+            console.error('Hiba az adatok lekérdezése során:', error);
+            res.status(500).json({ error: 'Hiba az adatok lekérdezése során' });
+        } else {
+            const images = results.map(image => {
+                return {
+                    filename: image.filename,
+                    filepath: path.join(__dirname, 'public', 'images', image.filename)
+                };
+            });
+            console.log('Képek sikeresen lekérdezve');
+            res.status(200).json(images);
         }
-        res.status(200).json(results);
-        connection.end(); 
+        connection.end();
     });
 });
 
