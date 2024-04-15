@@ -50,7 +50,7 @@ async function allataink(event) {
 
         }
     } catch (error) {
-        alert('Hiba történt');
+        alert('Hiba történt...');
         window.location.reload();
     }
 }
@@ -67,9 +67,10 @@ async function allatok() {
 
         if (allatok.length > 0) {
             allatok.forEach(allat => {
+                console.log(allat);
                 const div = document.createElement('div');
                 const text = document.createElement('p');
-                text.innerHTML = `Állat neve: ${allat.allatnev}<br>Termet: ${allat.termet}<br>Színe:${allat.szin} <br>Ivar: ${allat.ivar}<br>Kora: ${allat.kor}<br>Leírás az állatról: ${allat.leiras}<br>Kép:${allat.kep_id}`;
+                text.innerHTML = `Állat neve: ${allat.allatnev}<br>Termet: ${allat.termet}<br>Színe:${allat.szin} <br>Ivar: ${allat.ivar}<br>Kora: ${allat.kor}<br>Leírás az állatról: ${allat.leiras}<br>Kép:<br><img src="http://localhost:8080/images/${allat.filename}" alt="no picture found"/>`;
                 div.appendChild(text);
                 wrapper.appendChild(div);
             });
