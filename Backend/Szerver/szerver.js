@@ -8,6 +8,9 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+//app.use(bodyParser.json());
 
 const mysql = require('mysql');
 
@@ -464,6 +467,20 @@ app.post('/feltoltes', feltoltes.single('image'), (req, res) => {
         });
     });
 });
+app.get('/osszesallat',bodyParser.json(), (req, res) => {
+    const connection = kapcsolat(); 
+    connection.connect();
+    const selectQuery = 'SELECT * FROM allatok';
+    connection.query(selectQuery, (error, results, fields) => {
+        if (error) {
+            console.error('Hiba az állatok lekérésekor:', error);
+            res.status(500).json({ error: 'Hiba az állatok lekérésekor' });
+            return;
+        }
+        res.status(200).json(results);
+        connection.end(); 
+    });
+});
 
 app.use("/images", express.static('public/images'));
 
@@ -490,7 +507,5 @@ app.get('/kepek', (req, res) => {
         connection.end();
     });
 });
-
-
 
 app.listen(8080);
