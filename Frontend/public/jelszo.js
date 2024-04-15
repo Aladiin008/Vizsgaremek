@@ -11,51 +11,22 @@ async function jelszomodositas(event) {
         return;
     }
 
-    const data = {
-        email: email,
-        password: regijelszo
-    };
+    const response = await fetch('http://127.0.0.1:8080/jelszomodositas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email:email, regijelszo:regijelszo, ujjelszo:ujjelszo })
+    });
+    
+    const data = await response.json();
+    console.log(data);
 
-    try {
-        const response = await fetch('http://localhost:8080/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-
-        const responseData = await response.json();
-        console.log(responseData);
-
-        if (response.ok) {
-            const newData = {
-                email: email,
-                regijelszo:regijelszo,
-                ujjelszo: ujjelszo
-            };
-
-            const updateResponse = await fetch('http://localhost:8080/jelszomodositas', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newData),
-            });
-
-            const updateResponseData = await updateResponse.json();
-            console.log(updateResponseData);
-
-            if (updateResponse.ok) {
-                alert("Sikeres jelszó módosítás!");
-                window.location.href = 'login.html';
-            } else {
-                alert("Hiba történt a jelszó módosítása során!");
-            }
-        } else {
-            alert("Hibás e-mail cím vagy jelszó!");
-        }
-    } catch (error) {
-        console.error('Hiba történt:', error);
+    if (response.ok) {
+        alert("Sikeres jelszómódosítás!");
+        window.location.href = 'login.html';
+    } else {
+        alert("Hiba történt a jelszó módosítása során!");
     }
+
 }
