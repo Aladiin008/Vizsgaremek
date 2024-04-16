@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hu" class="egyeb-oldal">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adminjogosultság módosítása</title>
+    <link rel = "stylesheet" href = "/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+    <section class="navbar">
+        <nav>
+         <a href="index.html"><img src="/images/logo.png" id="logo"></a>
+         <div class = "pages" id="links">
+            <i class="fa fa-times" id=".fa-times"></i>
+             <ul>
+                <li><a href="galeriaszerkesztes.html" id="galeriaszerkesztes">Galéria szerkesztése</a></li>
+                <li><a href="allatokszerkesztese.html" id="allatokszerkesztese">Örökbefogadható állataink szerkesztése</a></li>
+                <li><a href="elozoev.html" id="elozoev">Féléves adatok szerkesztése</a></li>
+                <li><a href="admin.html" id="admin">Adminjogosultság kapcsoló</a></li>
+                <li><a href="login.html" id="bejelentkezes">Kijelentkezés</a></li>
+             </ul>
+         </div>
+         <i class="fa fa-bars" id=".fa-bars"></i>
+        </nav>
+    </section>
+
+   <section class="wrapper">
+        <div class="admin-form">
+            <h2>Adminjogosultság beállítása</h2>
+            <form id="adminForm">
+                <label for="email">Válassz egy felhasználót:</label>
+                <select id="email">
+                    
+                </select>
+                <label for="adminjogosultsag">Adminjogosultság:</label>
+                <select id="adminjogosultsag" name="adminjogosultsag">
+                    <option value="0">Nem admin</option>
+                    <option value="1">Admin</option>
+                </select>
+                <br><br>
+                <button type="submit" class="btn">Mentés</button>
+            </form>
+    </div>
+   </section>
+   
+    <footer>
+        <div class="footer-content">
+            <p>Mancs Állatmenhely</p>
+            <p>© 2024 Minden jog fenntartva.</p>
+        </div>
+    </footer>
+    <script src="/javascript/adminjogosultsag-script.js"></script>
+    <script src="/javascript/adminscript.js"></script>
+</body>
+</html>
