@@ -8,6 +8,9 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+//app.use(bodyParser.json());
 
 const mysql = require('mysql');
 
@@ -114,6 +117,26 @@ app.get('/data', (req, res) => {
         connection.end();
     });
 });
+
+app.get('/felhasznalo_email', bodyParser.json(), (req, res) => {
+    const connection = kapcsolat();
+    connection.connect();
+
+    const query = 'SELECT Email FROM Felhasznalok' ;
+
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Hiba az adatok lekérdezése során:', error);
+            res.status(500).json({ error: 'Hiba az adatok lekérdezése során' });
+        } else {
+            const emails = results.map(row => row.Email);
+            console.log('Felhasználók email címei sikeresen lekérdezve');
+            res.status(200).json(emails);
+        }
+        connection.end();
+    });
+});
+
 
 app.post('/admin/update', bodyParser.json(), (req, res) => {
     const { email, adminjogosultsag } = req.body;
@@ -269,43 +292,45 @@ app.post('/kereses',bodyParser.json(), (req, res) => {
     
 });
 
-    app.post('/jelszomodositas', bodyParser.json(), (req, res) => {
-        const { email, regijelszo, ujjelszo } = req.body;
-        const connection = kapcsolat();
+app.post('/jelszomodositas', bodyParser.json(), (req, res) => {
+    const { email, regijelszo, ujjelszo } = req.body;
+    const connection = kapcsolat();
 
-        connection.connect();
+    connection.connect();
 
-        const checkUserQuery = `SELECT FelhasznaloID FROM Felhasznalok WHERE Email = "${email}"`;
-        
-        connection.query(checkUserQuery, (error, results) => {
-            if (error) {
-                console.error('Hiba az ellenőrzés során:', error);
-                res.status(500).json({ error: 'Hiba az ellenőrzés során' });
-                connection.end();
-                return;
-            }
-
-            if (results.length === 0) {
-                res.status(404).json({ error: 'Nincs felhasználó ezzel az e-mail címmel' });
-                connection.end();
-                return;
-            }
-
-
-            const updateQuery = `UPDATE Felhasznalok SET Jelszo = "${ujjelszo}" WHERE Email = "${email}" AND Jelszo="${regijelszo}"`;
-
-            connection.query(updateQuery, (error, results) => {
-                if (error) {
-                    console.error('Hiba történt a jelszó módosítása során:', error);
-                    res.status(500).json({ error: 'Hiba történt a jelszó módosítása során.' });
-                } else {
-                    console.log('Jelszó sikeresen módosítva.');
-                    res.status(200).json(results);
-                }
+    const checkUserQuery = `SELECT FelhasznaloID FROM Felhasznalok WHERE Email = "${email}"`;
+    
+    connection.query(checkUserQuery, (error, results) => {
+        if (error) {
+            console.error('Hiba az ellenőrzés során:', error);
+            res.status(500).json({ error: 'Hiba az ellenőrzés során' });
             connection.end();
-            });
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).json({ error: 'Nincs felhasználó ezzel az e-mail címmel' });
+            connection.end();
+            return;
+        }
+
+
+        const updateQuery = `UPDATE Felhasznalok SET Jelszo = "${ujjelszo}" WHERE Email = "${email}" AND Jelszo="${regijelszo}"`;
+
+        connection.query(updateQuery, (error, results) => {
+            if (error) {
+                console.error('Hiba történt a jelszó módosítása során:', error);
+                res.status(500).json({ error: 'Hiba történt a jelszó módosítása során.' });
+            } else {
+                console.log('Jelszó sikeresen módosítva.');
+                res.status(200).json(results);
+            }
+        connection.end();
         });
     });
+});
+
+
 
 app.post('/adatmodositas', bodyParser.json(), (req, res) => {
     const { honapok, osszallat, kutyak } = req.body;
@@ -480,6 +505,20 @@ app.post('/feltoltes', feltoltes.single('image'), (req, res) => {
             res.status(200).json({ message: 'Id frissítve' });
             connection.end(); 
         });
+    });
+});
+app.get('/osszesallat',bodyParser.json(), (req, res) => {
+    const connection = kapcsolat(); 
+    connection.connect();
+    const selectQuery = 'SELECT * FROM allatok as allatok left join kepek as kepek on allatok.kep_id = kepek.id';
+    connection.query(selectQuery, (error, results, fields) => {
+        if (error) {
+            console.error('Hiba az állatok lekérésekor:', error);
+            res.status(500).json({ error: 'Hiba az állatok lekérésekor' });
+            return;
+        }
+        res.status(200).json(results);
+        connection.end(); 
     });
 });
 
